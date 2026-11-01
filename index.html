@@ -246,17 +246,62 @@ h2 {
 
   </section>
 
-  <section class="card hidden" id="nextStage">
-    <div class="decoration">💗</div>
-    <div class="tag">Una nueva sorpresa</div>
-    <h1>Esto apenas comienza.</h1>
-    <p class="description">
-      Todavía hay pequeñas cosas que quiero compartir contigo.
+  
+<section class="card hidden rap-card" id="nextStage">
+
+  <div class="tag">Una pequeña medida de cariño</div>
+
+  <h1>¿Cuánto me quieres?</h1>
+
+  <p class="description">
+    No hay respuestas incorrectas... bueno, eso creo.
+  </p>
+
+  <div class="snoopy-container">
+    <div id="snoopy">🐶</div>
+    <span class="snoopy-heart">♥</span>
+  </div>
+
+  <div class="affection-number">
+    <span id="percentage">50</span>%
+  </div>
+
+  <p class="affection-message" id="affectionMessage">
+    A ver, sorpréndeme...
+  </p>
+
+  <input
+    type="range"
+    id="affectionSlider"
+    min="0"
+    max="100"
+    value="50"
+    aria-label="Nivel de afecto"
+  >
+
+  <div class="range-labels">
+    <span>Poquito</span>
+    <span>Muchísimo</span>
+  </div>
+
+  <div class="surprise hidden" id="surprise">
+    <div class="letter">💌</div>
+    <h2>¡LO SABÍA!</h2>
+    <p>
+      Te dejo esta pequeña cartita porque
+      siempre hay espacio para un poquito
+      más de cariño.
     </p>
-    <button class="continue" onclick="location.reload()">
-      Volver al inicio
-    </button>
-  </section>
+    <div class="bread">🥮</div>
+    <h2>¡Un pan de muerto para ti!</h2>
+    <p class="description">Porque te mereces cosas bonitas. ♡</p>
+  </div>
+
+  <button class="continue hidden" id="rapContinue" onclick="goToThirdStage()">
+    Continuar →
+  </button>
+
+</section>
 
 </main>
 
