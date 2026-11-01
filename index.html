@@ -1,0 +1,293 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Una sorpresa para Sofi ♡</title>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  font-family: 'DM Sans', sans-serif;
+  color: #59344b;
+  background: linear-gradient(135deg, #fce4ef, #f6c9df, #fff0f5);
+  overflow-x: hidden;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 25px 16px;
+  position: relative;
+}
+
+.card {
+  width: 100%;
+  max-width: 480px;
+  padding: 35px 25px;
+  border-radius: 28px;
+  background: rgba(255,255,255,.85);
+  box-shadow: 0 15px 55px rgba(174,93,137,.17);
+  text-align: center;
+  animation: appear .8s ease;
+}
+
+.tag {
+  color: #ca78a1;
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 49px;
+  margin-bottom: 14px;
+}
+
+.heart {
+  color: #e58ab5;
+}
+
+.description {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #98768a;
+  margin-bottom: 27px;
+}
+
+.decoration {
+  font-size: 45px;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 23px;
+  margin-bottom: 22px;
+}
+
+.options {
+  display: grid;
+  gap: 12px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 17px;
+  border: 1px solid #f0d2e1;
+  border-radius: 15px;
+  background: #fffafd;
+  color: #68435a;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+  transition: .25s;
+}
+
+.option:hover {
+  transform: translateY(-3px);
+  background: #fff0f6;
+  border-color: #e5a4c4;
+}
+
+.option.selected {
+  background: #fce7f1;
+  border-color: #d47da6;
+}
+
+.number {
+  color: #cf85a8;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.reply {
+  margin-top: 22px;
+  padding: 20px;
+  background: #fceaf2;
+  border-radius: 18px;
+  animation: appear .5s ease;
+}
+
+.reply p {
+  font-family: 'Playfair Display', serif;
+  font-size: 19px;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.continue {
+  border: none;
+  background: #ca78a1;
+  color: white;
+  padding: 13px 27px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.continue:hover {
+  background: #b65e89;
+}
+
+.footer {
+  margin-top: 25px;
+  font-size: 11px;
+  color: #bd96aa;
+}
+
+.floating {
+  position: absolute;
+  color: #d78eb1;
+  opacity: .6;
+  animation: float 4s infinite ease-in-out;
+  pointer-events: none;
+}
+
+.f1 { top: 12%; left: 10%; font-size: 30px; }
+.f2 { top: 20%; right: 9%; font-size: 35px; }
+.f3 { bottom: 12%; right: 15%; font-size: 28px; }
+
+.hidden {
+  display: none !important;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-12px) rotate(10deg); }
+}
+
+@media(max-width:400px) {
+  h1 { font-size: 42px; }
+  .card { padding: 30px 19px; }
+  .option { font-size: 13px; }
+}
+</style>
+</head>
+
+<body>
+
+<main class="container">
+
+  <span class="floating f1">✦</span>
+  <span class="floating f2">♡</span>
+  <span class="floating f3">✧</span>
+
+  <section class="card" id="firstStage">
+
+    <div class="tag">Una pequeña sorpresa</div>
+
+    <h1>Hola, Sofi <span class="heart">♡</span></h1>
+
+    <p class="description">
+      Preparé algo para ti.<br>
+      Pero antes, quiero preguntarte algo...
+    </p>
+
+    <div class="decoration">🎀</div>
+
+    <h2>¿Con cuál de estas pequeñas confesiones te quedas?</h2>
+
+    <div class="options">
+
+      <button class="option" onclick="choose(0,this)">
+        <span><span class="number">01</span> Hay algo que quería decirte...</span>
+        <span>♡</span>
+      </button>
+
+      <button class="option" onclick="choose(1,this)">
+        <span><span class="number">02</span> Me gusta cuando apareces.</span>
+        <span>♡</span>
+      </button>
+
+      <button class="option" onclick="choose(2,this)">
+        <span><span class="number">03</span> Tengo una pequeña debilidad...</span>
+        <span>♡</span>
+      </button>
+
+      <button class="option" onclick="choose(3,this)">
+        <span><span class="number">04</span> Hoy quiero sacarte una sonrisa.</span>
+        <span>♡</span>
+      </button>
+
+    </div>
+
+    <div class="reply hidden" id="reply">
+      <p id="replyText"></p>
+      <button class="continue" onclick="nextStage()">
+        Continuar →
+      </button>
+    </div>
+
+    <div class="footer">
+      Hecho con cariño, solo para ti.
+    </div>
+
+  </section>
+
+  <section class="card hidden" id="nextStage">
+    <div class="decoration">💗</div>
+    <div class="tag">Una nueva sorpresa</div>
+    <h1>Esto apenas comienza.</h1>
+    <p class="description">
+      Todavía hay pequeñas cosas que quiero compartir contigo.
+    </p>
+    <button class="continue" onclick="location.reload()">
+      Volver al inicio
+    </button>
+  </section>
+
+</main>
+
+<script>
+const responses = [
+  "A veces las cosas más bonitas comienzan con algo pequeño. ♡",
+  "No sé qué tiene tu presencia, pero siempre consigue alegrarme.",
+  "Creo que tengo una debilidad por cierta personita...",
+  "Si consigo sacarte una sonrisa, ya habrá valido la pena."
+];
+
+function choose(index, button) {
+  document.querySelectorAll('.option').forEach(option => {
+    option.classList.remove('selected');
+  });
+
+  button.classList.add('selected');
+
+  document.getElementById('replyText').textContent =
+    responses[index];
+
+  document.getElementById('reply').classList.remove('hidden');
+}
+
+function nextStage() {
+  document.getElementById('firstStage').classList.add('hidden');
+  document.getElementById('nextStage').classList.remove('hidden');
+  window.scrollTo(0, 0);
+}
+</script>
+
+</body>
+  </html>
+  
