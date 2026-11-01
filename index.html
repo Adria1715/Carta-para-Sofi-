@@ -4,11 +4,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Una sorpresa para Sofi ♡</title>
+<meta name="theme-color" content="#f7d6e6">
+<title>Para Sofi ♡</title>
 
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 
 <style>
+:root {
+  --pink: #d979a5;
+  --dark-pink: #b95783;
+  --light-pink: #fce5ef;
+  --ink: #59344b;
+  --muted: #98768a;
+  --cream: #fffafd;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -18,9 +28,15 @@
 body {
   min-height: 100vh;
   font-family: 'DM Sans', sans-serif;
-  color: #59344b;
-  background: linear-gradient(135deg, #fce4ef, #f6c9df, #fff0f5);
-  overflow-x: hidden;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 10% 15%, #fff8fc, transparent 30%),
+    radial-gradient(circle at 90% 85%, #f3bdd7, transparent 35%),
+    linear-gradient(135deg, #fce4ef, #f5cadd, #fff0f5);
+}
+
+button {
+  font-family: inherit;
 }
 
 .container {
@@ -28,56 +44,107 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 25px 16px;
+  padding: 28px 15px;
   position: relative;
+  overflow: hidden;
 }
 
 .card {
   width: 100%;
-  max-width: 480px;
-  padding: 35px 25px;
+  max-width: 490px;
+  padding: 34px 23px;
   border-radius: 28px;
-  background: rgba(255,255,255,.85);
+  background: rgba(255,250,253,.94);
   box-shadow: 0 15px 55px rgba(174,93,137,.17);
   text-align: center;
-  animation: appear .8s ease;
+  animation: appear .6s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.hidden {
+  display: none !important;
 }
 
 .tag {
-  color: #ca78a1;
-  font-size: 11px;
-  letter-spacing: 4px;
+  color: var(--pink);
+  font-size: 10px;
+  letter-spacing: 3px;
+  font-weight: 700;
   text-transform: uppercase;
-  margin-bottom: 15px;
+  margin-bottom: 16px;
+}
+
+h1, h2 {
+  font-family: 'Playfair Display', serif;
 }
 
 h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 49px;
-  margin-bottom: 14px;
+  font-size: clamp(36px, 10vw, 49px);
+  line-height: 1.15;
+  margin-bottom: 15px;
+}
+
+h2 {
+  font-size: 23px;
+  margin-bottom: 18px;
+}
+
+.description {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--muted);
+  margin-bottom: 23px;
 }
 
 .heart {
   color: #e58ab5;
 }
 
-.description {
-  font-size: 14px;
-  line-height: 1.8;
-  color: #98768a;
-  margin-bottom: 27px;
-}
-
 .decoration {
-  font-size: 45px;
-  margin-bottom: 20px;
+  font-size: 44px;
+  margin: 20px 0;
 }
 
-h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 23px;
-  margin-bottom: 22px;
+.footer {
+  color: #bd96aa;
+  font-size: 11px;
+  margin-top: 24px;
 }
+
+.continue {
+  border: none;
+  background: linear-gradient(135deg, #d987ad, #bd5f8e);
+  color: white;
+  padding: 14px 27px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 700;
+  box-shadow: 0 6px 18px #c36e9760;
+  transition: .2s;
+  margin-top: 17px;
+}
+
+.continue:hover {
+  transform: translateY(-2px);
+}
+
+/* DECORACIONES */
+
+.floating {
+  position: fixed;
+  color: #d78eb1;
+  opacity: .6;
+  pointer-events: none;
+  animation: float 4s infinite ease-in-out;
+  z-index: 0;
+}
+
+.f1 {top: 12%;left: 8%;font-size: 30px;}
+.f2 {top: 22%;right: 8%;font-size: 35px;}
+.f3 {bottom: 12%;right: 15%;font-size: 28px;}
+
+/* ETAPA 1 */
 
 .options {
   display: grid;
@@ -86,42 +153,37 @@ h2 {
 
 .option {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
-  padding: 17px;
+  padding: 17px 14px;
   border: 1px solid #f0d2e1;
   border-radius: 15px;
   background: #fffafd;
   color: #68435a;
-  font-size: 14px;
+  font-size: 13px;
   text-align: left;
   cursor: pointer;
   transition: .25s;
 }
 
-.option:hover {
-  transform: translateY(-3px);
-  background: #fff0f6;
-  border-color: #e5a4c4;
-}
-
-.option.selected {
+.option:hover, .option.selected {
   background: #fce7f1;
   border-color: #d47da6;
+  transform: translateY(-2px);
 }
 
 .number {
   color: #cf85a8;
   font-weight: bold;
-  margin-right: 10px;
+  margin-right: 7px;
 }
 
 .reply {
-  margin-top: 22px;
+  margin-top: 20px;
   padding: 20px;
-  background: #fceaf2;
   border-radius: 18px;
+  background: #fceaf2;
   animation: appear .5s ease;
 }
 
@@ -129,105 +191,337 @@ h2 {
   font-family: 'Playfair Display', serif;
   font-size: 19px;
   line-height: 1.6;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
-.continue {
-  border: none;
-  background: #ca78a1;
-  color: white;
-  padding: 13px 27px;
-  border-radius: 30px;
-  cursor: pointer;
-  font-weight: bold;
+/* ETAPA 2 */
+
+.snoopy-container {
+  width: 130px;
+  height: 130px;
+  margin: 25px auto;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #fce4ef;
+  border: 2px solid #e7a0c1;
+  box-shadow: 0 0 25px #e7a0c155;
+  position: relative;
 }
 
-.continue:hover {
-  background: #b65e89;
+#snoopy {
+  font-size: 65px;
+  transition: transform .2s;
 }
 
-.footer {
-  margin-top: 25px;
-  font-size: 11px;
-  color: #bd96aa;
-}
-
-.floating {
+.snoopy-heart {
   position: absolute;
-  color: #d78eb1;
-  opacity: .6;
-  animation: float 4s infinite ease-in-out;
-  pointer-events: none;
+  right: 3px;
+  top: 0;
+  color: #e58ab5;
+  font-size: 27px;
 }
 
-.f1 { top: 12%; left: 10%; font-size: 30px; }
-.f2 { top: 20%; right: 9%; font-size: 35px; }
-.f3 { bottom: 12%; right: 15%; font-size: 28px; }
-
-.hidden {
-  display: none !important;
+.affection-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 48px;
+  color: var(--pink);
 }
 
-@keyframes appear {
-  from { opacity: 0; transform: translateY(15px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes float {
-  0%,100% { transform: translateY(0) rotate(0); }
-  50% { transform: translateY(-12px) rotate(10deg); }
-}
-
-@media(max-width:400px) {
-  h1 { font-size: 42px; }
-  .card { padding: 30px 19px; }
-  .option { font-size: 13px; }
-}
-  
-/* Ambientación RAP */
-.rap-card {
-  background: linear-gradient(145deg, #211333, #392052, #51266b) !important;
-  color: #ffffff;
-  border: 1px solid #bd79ed;
-  box-shadow: 0 0 35px #9b4dcc44;
-}
-
-.rap-card h1 {
-  color: #f4d8ff;
-}
-
-.rap-card .tag {
-  color: #e4a5ff;
-}
-
-.rap-card .description {
-  color: #ddc5e9;
-}
-
-.rap-card .affection-message {
-  color: #f3caff;
+.affection-message {
+  margin: 8px 0 22px;
+  color: var(--muted);
 }
 
 #affectionSlider {
+  appearance: none;
+  -webkit-appearance: none;
+  display: block;
   width: 100%;
-  accent-color: #e8a4ff;
-  height: 9px;
+  height: 12px;
+  margin: 22px 0 12px;
+  border-radius: 20px;
+  outline: none;
+  cursor: pointer;
+  background: linear-gradient(
+    to right,
+    #d878a5 0%,
+    #d878a5 var(--progress, 50%),
+    #f0d6e3 var(--progress, 50%),
+    #f0d6e3 100%
+  );
+  touch-action: pan-y;
 }
 
-.rap-card .snoopy-container {
-  background: #69418a;
-  border-color: #e4a5ff;
-  box-shadow: 0 0 30px #d18aff66;
+#affectionSlider::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #c65f91;
+  border: 3px solid white;
+  box-shadow: 0 2px 8px #b85e8d66;
 }
 
-.rap-card .affection-number {
-  color: #e8a4ff;
+#affectionSlider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #c65f91;
+  border: 3px solid white;
 }
 
-.rap-card .range-labels {
-  color: #e1c6f0;
+.range-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 10px;
 }
-  
+
+.surprise {
+  margin-top: 25px;
+  padding: 22px;
+  border-radius: 20px;
+  background: linear-gradient(145deg,#fff0f6,#fce1ee);
+  animation: appear .6s ease;
+}
+
+.surprise p {
+  line-height: 1.7;
+  margin: 12px 0;
+}
+
+.letter-icon {
+  font-size: 48px;
+}
+
+.bread {
+  font-size: 70px;
+  margin: 15px;
+}
+
+/* ETAPA 3: DIBUJO */
+
+.canvas-container {
+  border: 2px solid #edc5d8;
+  border-radius: 17px;
+  overflow: hidden;
+  background: white;
+  margin: 20px 0;
+  touch-action: none;
+}
+
+#drawingCanvas {
+  display: block;
+  width: 100%;
+  height: 330px;
+  background: white;
+  touch-action: none;
+  cursor: crosshair;
+}
+
+.tools {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 9px;
+  margin: 15px 0;
+}
+
+.color {
+  width: 29px;
+  height: 29px;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 0 0 1px #e5b8cc;
+  cursor: pointer;
+}
+
+.color.active {
+  box-shadow: 0 0 0 3px #c65f91;
+}
+
+.tool-button {
+  border: 1px solid #ecc8d9;
+  background: #fff1f7;
+  color: #925475;
+  border-radius: 20px;
+  padding: 9px 14px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.tool-button.active {
+  background: #d979a5;
+  color: white;
+}
+
+.drawing-compliment {
+  background: #fceaf2;
+  padding: 17px;
+  border-radius: 17px;
+  margin-top: 18px;
+  font-family: 'Playfair Display', serif;
+  line-height: 1.7;
+  animation: appear .5s ease;
+}
+
+/* ETAPA 4: JUEGO */
+
+.game-board {
+  background: linear-gradient(145deg,#fff0f6,#f9d9e8);
+  border: 2px solid #efc1d6;
+  border-radius: 20px;
+  padding: 15px;
+  margin: 18px 0;
+}
+
+.game-info {
+  display: flex;
+  justify-content: space-around;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 13px;
+  color: #9b5578;
+  margin-bottom: 15px;
+}
+
+.game-character {
+  font-size: 60px;
+  margin: 10px;
+}
+
+.game-instructions {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.heart-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 9px;
+  margin-top: 16px;
+}
+
+.game-heart {
+  min-height: 58px;
+  border: 1px solid #eabbd0;
+  background: #fffafd;
+  border-radius: 14px;
+  font-size: 26px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.game-heart:active {
+  transform: scale(.9);
+}
+
+.game-heart.found {
+  background: #f8d4e5;
+  opacity: .55;
+  cursor: default;
+}
+
+.game-status {
+  color: #ad6084;
+  font-weight: 600;
+  font-size: 13px;
+  margin: 12px 0;
+}
+
+/* CARTAS FINALES */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 9px;
+  margin: 22px 0;
+}
+
+.poem-card {
+  min-width: 0;
+  min-height: 140px;
+  padding: 12px 5px;
+  border: 1px solid #e8b5cd;
+  border-radius: 16px;
+  background: linear-gradient(145deg,#fffafd,#f9dce9);
+  color: #995575;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.poem-card:disabled {
+  opacity: .55;
+  cursor: not-allowed;
+}
+
+.poem-card.unlocked {
+  border: 2px solid #d979a5;
+  box-shadow: 0 5px 18px #d979a544;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.poem-card span {
+  display: block;
+  font-size: 30px;
+  margin-bottom: 12px;
+}
+
+.poem-card strong {
+  font-size: 11px;
+}
+
+.poem-result {
+  background: #fceaf2;
+  padding: 22px;
+  border-radius: 20px;
+  margin-top: 15px;
+  animation: appear .6s ease;
+}
+
+.poem-result p {
+  font-family: 'Playfair Display',serif;
+  line-height: 1.9;
+  white-space: pre-line;
+}
+
+.final-screen {
+  padding-top: 15px;
+}
+
+.final-title {
+  font-size: clamp(30px,8vw,43px);
+  color: #bd5f8e;
+  line-height: 1.3;
+  margin: 20px 0;
+}
+
+.final-snoopy {
+  font-size: 85px;
+  margin: 20px;
+}
+
+@keyframes appear {
+  from {opacity:0;transform:translateY(15px);}
+  to {opacity:1;transform:translateY(0);}
+}
+
+@keyframes float {
+  0%,100% {transform:translateY(0);}
+  50% {transform:translateY(-12px);}
+}
+
+@media(max-width:390px) {
+  .card {padding:28px 17px;}
+  .option {font-size:12px;}
+  #drawingCanvas {height:280px;}
+  .poem-card {min-height:125px;}
+}
 </style>
 </head>
 
@@ -235,64 +529,66 @@ h2 {
 
 <main class="container">
 
-  <span class="floating f1">✦</span>
-  <span class="floating f2">♡</span>
-  <span class="floating f3">✧</span>
+<span class="floating f1">✦</span>
+<span class="floating f2">♡</span>
+<span class="floating f3">✧</span>
 
-  <section class="card" id="firstStage">
+<!-- ETAPA 1: POP -->
 
-    <div class="tag">Una pequeña sorpresa</div>
+<section class="card" id="stage1">
 
-    <h1>Hola, Sofi <span class="heart">♡</span></h1>
+  <div class="tag">Una pequeña sorpresa</div>
 
-    <p class="description">
-      Preparé algo para ti.<br>
-      Pero antes, quiero preguntarte algo...
-    </p>
+  <h1>Hola, Sofi <span class="heart">♡</span></h1>
 
-    <div class="decoration">🎀</div>
+  <p class="description">
+    Preparé algo para ti.<br>
+    Pero antes, quiero preguntarte algo...
+  </p>
 
-    <h2>¿Con cuál de estas pequeñas confesiones te quedas?</h2>
+  <div class="decoration">🎀</div>
 
-    <div class="options">
+  <h2>¿Con cuál de estas pequeñas confesiones te quedas?</h2>
 
-      <button class="option" onclick="choose(0,this)">
-        <span><span class="number">01</span> Hay algo que quería decirte...</span>
-        <span>♡</span>
-      </button>
+  <div class="options">
 
-      <button class="option" onclick="choose(1,this)">
-        <span><span class="number">02</span> Me gusta cuando apareces.</span>
-        <span>♡</span>
-      </button>
+    <button class="option" onclick="chooseMessage(0,this)">
+      <span><span class="number">01</span>Hay algo que quería decirte...</span>
+      <span>♡</span>
+    </button>
 
-      <button class="option" onclick="choose(2,this)">
-        <span><span class="number">03</span> Tengo una pequeña debilidad...</span>
-        <span>♡</span>
-      </button>
+    <button class="option" onclick="chooseMessage(1,this)">
+      <span><span class="number">02</span>Me gusta cuando apareces.</span>
+      <span>♡</span>
+    </button>
 
-      <button class="option" onclick="choose(3,this)">
-        <span><span class="number">04</span> Hoy quiero sacarte una sonrisa.</span>
-        <span>♡</span>
-      </button>
+    <button class="option" onclick="chooseMessage(2,this)">
+      <span><span class="number">03</span>Tengo una pequeña debilidad...</span>
+      <span>♡</span>
+    </button>
 
-    </div>
+    <button class="option" onclick="chooseMessage(3,this)">
+      <span><span class="number">04</span>Hoy quiero sacarte una sonrisa.</span>
+      <span>♡</span>
+    </button>
 
-    <div class="reply hidden" id="reply">
-      <p id="replyText"></p>
-      <button class="continue" onclick="nextStage()">
-        Continuar →
-      </button>
-    </div>
+  </div>
 
-    <div class="footer">
-      Hecho con cariño, solo para ti.
-    </div>
+  <div class="reply hidden" id="messageReply">
+    <p id="messageText"></p>
+    <button class="continue" onclick="showStage(2)">
+      Continuar →
+    </button>
+  </div>
 
-  </section>
+  <div class="footer">Hecho con cariño, solo para ti.</div>
 
-  
-<section class="card hidden rap-card" id="nextStage">
+</section>
+
+
+<!-- ETAPA 2: SNOOPY Y AFECTO -->
+
+<section class="card hidden" id="stage2">
 
   <div class="tag">Una pequeña medida de cariño</div>
 
@@ -320,7 +616,9 @@ h2 {
     id="affectionSlider"
     min="0"
     max="100"
+    step="1"
     value="50"
+    style="--progress:50%"
     aria-label="Nivel de afecto"
   >
 
@@ -330,27 +628,229 @@ h2 {
   </div>
 
   <div class="surprise hidden" id="surprise">
-    <div class="letter">💌</div>
+
+    <div class="letter-icon">💌</div>
+
     <h2>¡LO SABÍA!</h2>
+
     <p>
       Te dejo esta pequeña cartita porque
       siempre hay espacio para un poquito
       más de cariño.
     </p>
+
     <div class="bread">🥮</div>
+
     <h2>¡Un pan de muerto para ti!</h2>
-    <p class="description">Porque te mereces cosas bonitas. ♡</p>
+
+    <p>Porque te mereces cosas bonitas. ♡</p>
+
   </div>
 
-  <button class="continue hidden" id="rapContinue" onclick="goToThirdStage()">
+  <button class="continue hidden" id="toDrawing" onclick="showStage(3)">
     Continuar →
   </button>
 
 </section>
 
+
+<!-- ETAPA 3: DIBUJO -->
+
+<section class="card hidden" id="stage3">
+
+  <div class="tag">Un pequeño espacio para ti</div>
+
+  <h1>¡Dibuja algo! ♡</h1>
+
+  <p class="description">
+    Puedes dibujar lo que quieras.
+    No importa si es una obra maestra o un garabato.
+  </p>
+
+  <div class="canvas-container">
+    <canvas id="drawingCanvas"></canvas>
+  </div>
+
+  <div class="tools" id="colors">
+    <button class="color active" style="background:#e85d91" data-color="#e85d91" aria-label="Rosa"></button>
+    <button class="color" style="background:#e74c3c" data-color="#e74c3c" aria-label="Rojo"></button>
+    <button class="color" style="background:#8e44ad" data-color="#8e44ad" aria-label="Morado"></button>
+    <button class="color" style="background:#3498db" data-color="#3498db" aria-label="Azul"></button>
+    <button class="color" style="background:#2ecc71" data-color="#2ecc71" aria-label="Verde"></button>
+    <button class="color" style="background:#333333" data-color="#333333" aria-label="Negro"></button>
+    <button class="color" style="background:#f1c40f" data-color="#f1c40f" aria-label="Amarillo"></button>
+  </div>
+
+  <div class="tools">
+    <button class="tool-button" id="eraser">Borrador</button>
+    <button class="tool-button" id="clearCanvas">Limpiar todo</button>
+  </div>
+
+  <div class="drawing-compliment hidden" id="compliment">
+    No importa qué hayas dibujado, lo bonito es que
+    hayas dejado un pedacito de tu imaginación aquí.
+    Tienes una forma muy especial de hacer bonitas
+    hasta las cosas más sencillas. ♡
+  </div>
+
+  <button class="continue" id="saveDrawing">
+    Guardar mi dibujo →
+  </button>
+
+</section>
+
+
+<!-- ETAPA 4: JUEGO -->
+
+<section class="card hidden" id="stage4">
+
+  <div class="tag">Una última aventura</div>
+
+  <h1>¡Ayuda a Snoopy!</h1>
+
+  <p class="description">
+    Snoopy está buscando un regalo especial.
+    Ayúdalo a encontrar 8 corazones antes de que
+    termine el tiempo.
+  </p>
+
+  <div class="game-board">
+
+    <div class="game-info">
+      <span>♥ <span id="score">0</span>/8</span>
+      <span>Tiempo: <span id="timer">60</span>s</span>
+    </div>
+
+    <div class="game-character" id="gameSnoopy">🐶</div>
+
+    <p class="game-instructions" id="gameInstructions">
+      Pulsa los corazones para ayudar a Snoopy.
+    </p>
+
+    <div class="heart-grid" id="heartGrid"></div>
+
+    <p class="game-status" id="gameStatus">
+      ¡Vamos a encontrar ese regalo!
+    </p>
+
+  </div>
+
+  <button class="continue" id="startGame">
+    ¡Comenzar aventura! →
+  </button>
+
+  <button class="continue hidden" id="finishGame">
+    Continuar a las cartas →
+  </button>
+
+</section>
+
+
+<!-- CARTAS -->
+
+<section class="card hidden" id="stageCards">
+
+  <div class="tag">Algo que quiero decirte</div>
+
+  <h1>Tres pequeñas cartas ♡</h1>
+
+  <p class="description">
+    Cada carta guarda unas palabras.
+    Pero tendrás que descubrir cuál te corresponde.
+  </p>
+
+  <div class="cards">
+
+    <button class="poem-card" id="card1" disabled>
+      <span>💌</span>
+      <strong>Una carta</strong>
+      <small>🔒</small>
+    </button>
+
+    <button class="poem-card" id="card2" disabled>
+      <span>💌</span>
+      <strong>Otra carta</strong>
+      <small>🔒</small>
+    </button>
+
+    <button class="poem-card" id="card3" disabled>
+      <span>💌</span>
+      <strong>La última</strong>
+      <small>🔒</small>
+    </button>
+
+  </div>
+
+  <p class="game-status" id="cardHint">
+    Una de estas cartas guarda algo para ti...
+  </p>
+
+  <div class="poem-result hidden" id="poemResult">
+    <div class="letter-icon">💗</div>
+    <h2>Para ti, Sofi</h2>
+    <p id="poemText"></p>
+    <button class="continue" onclick="showStage('final')">
+      Abrir mi última sorpresa →
+    </button>
+  </div>
+
+</section>
+
+
+<!-- FINAL -->
+
+<section class="card hidden final-screen" id="stageFinal">
+
+  <div class="tag">Un pequeño detalle para ti</div>
+
+  <div class="final-snoopy">🐶💗</div>
+
+  <h1 class="final-title">
+    Eres la mejor personita, Sofi.
+  </h1>
+
+  <p class="description">
+    Espero haberte regalado un poquito de alegría.
+    Gracias por llegar hasta aquí.
+  </p>
+
+  <div class="decoration">♡ ✨ ♡</div>
+
+  <p style="color:#bd7195;font-family:'Playfair Display',serif;font-size:19px;">
+    Con mucho cariño.
+  </p>
+
+</section>
+
 </main>
 
+
 <script>
+
+/* CONTROL DE ETAPAS */
+
+function showStage(number) {
+
+  document.querySelectorAll(".card").forEach(card => {
+    card.classList.add("hidden");
+  });
+
+  const target = number === "final"
+    ? document.getElementById("stageFinal")
+    : document.getElementById("stage" + number);
+
+  target.classList.remove("hidden");
+
+  window.scrollTo({top:0,behavior:"smooth"});
+
+  if(number === 3) {
+    setTimeout(resizeCanvas,100);
+  }
+}
+
+
+/* ETAPA 1 */
+
 const responses = [
   "A veces las cosas más bonitas comienzan con algo pequeño. ♡",
   "No sé qué tiene tu presencia, pero siempre consigue alegrarme.",
@@ -358,26 +858,387 @@ const responses = [
   "Si consigo sacarte una sonrisa, ya habrá valido la pena."
 ];
 
-function choose(index, button) {
-  document.querySelectorAll('.option').forEach(option => {
-    option.classList.remove('selected');
+function chooseMessage(index,button) {
+
+  document.querySelectorAll(".option").forEach(option => {
+    option.classList.remove("selected");
   });
 
-  button.classList.add('selected');
+  button.classList.add("selected");
 
-  document.getElementById('replyText').textContent =
+  document.getElementById("messageText").textContent =
     responses[index];
 
-  document.getElementById('reply').classList.remove('hidden');
+  document.getElementById("messageReply").classList.remove("hidden");
 }
 
-function nextStage() {
-  document.getElementById('firstStage').classList.add('hidden');
-  document.getElementById('nextStage').classList.remove('hidden');
-  window.scrollTo(0, 0);
+
+/* ETAPA 2: MEDIDOR */
+
+const slider = document.getElementById("affectionSlider");
+const percentage = document.getElementById("percentage");
+const snoopy = document.getElementById("snoopy");
+const affectionMessage = document.getElementById("affectionMessage");
+const surprise = document.getElementById("surprise");
+const toDrawing = document.getElementById("toDrawing");
+
+let reached100 = false;
+
+function updateAffection() {
+
+  const value = Number(slider.value);
+
+  percentage.textContent = value;
+
+  slider.style.setProperty("--progress",value + "%");
+
+  snoopy.style.transform =
+    `scale(${1 + value/500}) translateY(${-value/20}px)`;
+
+  const messages = [
+    "¿Ni tantito? 🥺",
+    "Un poquito de cariño...",
+    "Eso ya me gusta.",
+    "¡Vamos progresando!",
+    "¡Muchísimo cariño!"
+  ];
+
+  const index = Math.min(4,Math.floor(value/25));
+
+  affectionMessage.textContent = messages[index];
+
+  const isFull = value === 100;
+
+  surprise.classList.toggle("hidden",!isFull);
+  toDrawing.classList.toggle("hidden",!isFull);
+
+  if(isFull) reached100 = true;
 }
+
+slider.addEventListener("input",updateAffection);
+slider.value = 50;
+updateAffection();
+
+
+/* ETAPA 3: LIENZO */
+
+const canvas = document.getElementById("drawingCanvas");
+const ctx = canvas.getContext("2d");
+
+let drawing = false;
+let color = "#e85d91";
+let erasing = false;
+let drawingSaved = false;
+
+function resizeCanvas() {
+
+  const rect = canvas.getBoundingClientRect();
+
+  if(!rect.width) return;
+
+  const old = document.createElement("canvas");
+  old.width = canvas.width;
+  old.height = canvas.height;
+
+  if(canvas.width && canvas.height) {
+    old.getContext("2d").drawImage(canvas,0,0);
+  }
+
+  const ratio = window.devicePixelRatio || 1;
+
+  canvas.width = rect.width * ratio;
+  canvas.height = rect.height * ratio;
+
+  ctx.setTransform(ratio,0,0,ratio,0,0);
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.lineWidth = 4;
+  ctx.strokeStyle = color;
+
+  if(old.width && old.height) {
+    ctx.drawImage(old,0,0,old.width,old.height,
+      0,0,rect.width,rect.height);
+  }
+}
+
+window.addEventListener("resize",resizeCanvas);
+
+function getPosition(event) {
+  const rect = canvas.getBoundingClientRect();
+
+  return {
+    x:event.clientX-rect.left,
+    y:event.clientY-rect.top
+  };
+}
+
+canvas.addEventListener("pointerdown",event => {
+
+  drawing = true;
+  canvas.setPointerCapture(event.pointerId);
+
+  const pos = getPosition(event);
+
+  ctx.beginPath();
+  ctx.moveTo(pos.x,pos.y);
+
+});
+
+canvas.addEventListener("pointermove",event => {
+
+  if(!drawing) return;
+
+  const pos = getPosition(event);
+
+  ctx.lineWidth = erasing ? 22 : 4;
+  ctx.strokeStyle = erasing ? "#ffffff" : color;
+
+  ctx.lineTo(pos.x,pos.y);
+  ctx.stroke();
+
+});
+
+function stopDrawing() {
+  drawing = false;
+  ctx.beginPath();
+}
+
+canvas.addEventListener("pointerup",stopDrawing);
+canvas.addEventListener("pointercancel",stopDrawing);
+
+document.querySelectorAll(".color").forEach(button => {
+
+  button.addEventListener("click",() => {
+
+    document.querySelectorAll(".color").forEach(b => {
+      b.classList.remove("active");
+    });
+
+    button.classList.add("active");
+
+    color = button.dataset.color;
+    erasing = false;
+
+    document.getElementById("eraser").classList.remove("active");
+
+  });
+
+});
+
+/* BOTONES DEL LIENZO */
+
+document.getElementById("eraser").addEventListener("click",function() {
+  erasing = !erasing;
+  this.classList.toggle("active",erasing);
+});
+
+document.getElementById("clearCanvas").addEventListener("click",() => {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  drawingSaved = false;
+  document.getElementById("compliment").classList.add("hidden");
+});
+
+document.getElementById("saveDrawing").addEventListener("click",() => {
+  drawingSaved = true;
+
+  document.getElementById("compliment").classList.remove("hidden");
+
+  document.getElementById("saveDrawing").textContent =
+    "¡Dibujo guardado! ♡";
+
+  setTimeout(() => showStage(4),1800);
+});
+
+
+/* ETAPA 4: MINIJUEGO */
+
+const grid = document.getElementById("heartGrid");
+const scoreText = document.getElementById("score");
+const timerText = document.getElementById("timer");
+const gameStatus = document.getElementById("gameStatus");
+
+const startGame = document.getElementById("startGame");
+const finishGame = document.getElementById("finishGame");
+
+let score = 0;
+let time = 60;
+let gameInterval = null;
+let gameFinished = false;
+let gameWon = false;
+
+function buildGame() {
+  grid.innerHTML = "";
+
+  for(let i=0; i<12; i++) {
+    const button = document.createElement("button");
+
+    button.className = "game-heart";
+    button.textContent = "♡";
+    button.type = "button";
+
+    button.addEventListener("click",() => {
+
+      if(gameFinished || button.classList.contains("found")) return;
+
+      button.classList.add("found");
+      button.textContent = "♥";
+
+      score++;
+      scoreText.textContent = score;
+
+      if(score >= 8) {
+        endGame(true);
+      }
+    });
+
+    grid.appendChild(button);
+  }
+}
+
+function startGameNow() {
+  score = 0;
+  time = 60;
+  gameFinished = false;
+  gameWon = false;
+
+  scoreText.textContent = "0";
+  timerText.textContent = "60";
+
+  gameStatus.textContent = "¡Busca los corazones!";
+
+  buildGame();
+
+  startGame.classList.add("hidden");
+  finishGame.classList.add("hidden");
+
+  clearInterval(gameInterval);
+
+  gameInterval = setInterval(() => {
+    time--;
+    timerText.textContent = time;
+
+    if(time <= 0) {
+      endGame(false);
+    }
+  },1000);
+}
+
+function endGame(won) {
+  clearInterval(gameInterval);
+
+  gameFinished = true;
+  gameWon = won;
+
+  if(won) {
+    gameStatus.textContent = "¡SNOOPY ENCONTRÓ EL REGALO! 🎁";
+    document.getElementById("gameSnoopy").textContent = "🐶🎁";
+  } else {
+    gameStatus.textContent = "¡Se terminó el tiempo! ♡";
+  }
+
+  finishGame.classList.remove("hidden");
+}
+
+startGame.addEventListener("click",startGameNow);
+
+finishGame.addEventListener("click",() => {
+  showStage("Cards");
+  prepareCards();
+});
+
+
+/* CARTAS Y POEMAS */
+
+const poems = [
+
+`Hay personas que llegan
+sin hacer demasiado ruido,
+y aun así consiguen
+hacer más bonito un día.
+
+Quizá no lo sepas,
+pero tu sonrisa
+tiene algo especial. ♡`,
+
+`Si pudiera guardar
+un instante bonito,
+guardaría uno
+en el que estés sonriendo.
+
+Porque hay pequeñas cosas
+que hacen grande la vida,
+y algunas tienen tu nombre. ♡`,
+
+`No necesito grandes motivos
+para desearte cosas bonitas.
+
+Que nunca te falten
+razones para sonreír,
+personas que te quieran
+y sueños que perseguir.
+
+Y que nunca olvides
+lo especial que eres. ♡`
+
+];
+
+let unlockedCard = 0;
+
+function prepareCards() {
+
+  const objectives =
+    (reached100 ? 1 : 0) +
+    (drawingSaved ? 1 : 0) +
+    (gameWon ? 1 : 0);
+
+  unlockedCard =
+    objectives >= 3 ? 2 :
+    objectives >= 2 ? 1 : 0;
+
+  for(let i=0; i<3; i++) {
+
+    const button = document.getElementById("card"+(i+1));
+
+    const unlocked = i === unlockedCard;
+
+    button.disabled = !unlocked;
+    button.classList.toggle("unlocked",unlocked);
+
+    button.querySelector("small").textContent =
+      unlocked ? "✨" : "🔒";
+
+    button.onclick = unlocked
+      ? () => openPoem(i)
+      : null;
+  }
+
+  const hints = [
+    "Has descubierto una carta especial para ti.",
+    "¡Tus pequeños logros te han llevado a una carta más especial!",
+    "¡Completaste todos los retos! Desbloqueaste la carta más especial."
+  ];
+
+  document.getElementById("cardHint").textContent =
+    hints[unlockedCard];
+}
+
+function openPoem(index) {
+
+  document.getElementById("poemText").textContent =
+    poems[index];
+
+  document.getElementById("poemResult").classList.remove("hidden");
+
+  document.querySelectorAll(".poem-card").forEach(button => {
+    button.disabled = true;
+  });
+}
+
+
+/* FINAL */
+
 </script>
 
 </body>
-  </html>
-  
+</html>
+
