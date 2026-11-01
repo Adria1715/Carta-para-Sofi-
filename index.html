@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para Sofi 💗</title>
+<title>Una carta para Sofi 💗</title>
 
 <style>
 * {
@@ -24,14 +25,15 @@ body {
 .stage {
   display: none;
   width: 100%;
-  max-width: 520px;
-  margin: 30px auto;
-  padding: 28px 20px;
-  background: rgba(255,255,255,0.85);
+  max-width: 650px;
+  min-height: 80vh;
+  margin: 35px auto;
+  padding: 30px 22px;
+  background: rgba(255,255,255,.9);
   border: 2px solid #ffd0e1;
-  border-radius: 25px;
-  box-shadow: 0 8px 25px rgba(190, 100, 140, 0.15);
-  animation: appear 0.5s ease;
+  border-radius: 28px;
+  box-shadow: 0 8px 25px rgba(190,100,140,.15);
+  animation: appear .5s ease;
 }
 
 .stage.active {
@@ -54,11 +56,11 @@ h1, h2, h3 {
 }
 
 h1 {
-  font-size: 30px;
+  font-size: 34px;
 }
 
 h2 {
-  font-size: 25px;
+  font-size: 27px;
 }
 
 p {
@@ -76,36 +78,27 @@ button {
   font-weight: bold;
   cursor: pointer;
   box-shadow: 0 4px 10px #d88aaa55;
-  transition: 0.2s;
+  transition: .2s;
 }
 
 button:hover {
   background: #d76f9b;
-  transform: scale(1.04);
+  transform: translateY(-2px);
 }
 
 button:active {
-  transform: scale(0.97);
+  transform: scale(.97);
+}
+
+button:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .secondary {
   background: #f4c1d5;
   color: #874b67;
-}
-
-input[type="range"] {
-  width: 90%;
-  accent-color: #df80a7;
-  margin: 20px 0;
-}
-
-textarea {
-  width: 100%;
-  border: 2px solid #f2bfd3;
-  border-radius: 15px;
-  padding: 12px;
-  font-family: inherit;
-  resize: vertical;
 }
 
 .hidden {
@@ -128,106 +121,140 @@ textarea {
     opacity: 0;
   }
 }
-  /* SOBRE DE BIENVENIDA */
 
-.envelope {
-  width: 210px;
-  height: 140px;
-  margin: 45px auto 25px;
-  position: relative;
-  background: #e88db1;
-  border-radius: 8px;
+footer {
+  margin-top: 30px;
+  color: #c18ba0;
+  font-size: 13px;
+}
+</style>
+</head>
+<style>
+/* SOBRE */
+.envelope-container {
+  width: min(300px, 85vw);
+  height: 200px;
+  margin: 35px auto;
+  perspective: 900px;
   cursor: pointer;
-  box-shadow: 0 8px 20px #d88aaa55;
 }
 
-.envelope::before {
-  content: "";
+.envelope {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #f5a9c5;
+  border-radius: 8px;
+  overflow: visible;
+  box-shadow: 0 8px 20px #bd709455;
+}
+
+.envelope-body {
   position: absolute;
   inset: 0;
-  background: #f5b8cf;
-  clip-path: polygon(0 0, 50% 60%, 100% 0);
-  transform-origin: top;
-  transition: transform 0.6s;
+  background: linear-gradient(145deg,#f8b7cf,#e98fb3);
+  clip-path: polygon(0 0,50% 58%,100% 0,100% 100%,0 100%);
+  border-radius: 8px;
   z-index: 2;
 }
 
-.envelope.open::before {
-  transform: rotateX(180deg);
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 110px;
+  background: #e889ad;
+  clip-path: polygon(0 0,100% 0,50% 100%);
+  transform-origin: top center;
+  transition: transform .8s ease;
+  z-index: 4;
 }
 
 .envelope-note {
   position: absolute;
-  width: 85%;
-  height: 110px;
-  top: 10px;
-  left: 7.5%;
-  background: white;
-  border-radius: 5px;
+  left: 8%;
+  top: 12%;
+  width: 84%;
+  height: 75%;
+  padding: 20px 10px;
+  background: #fffafd;
+  border-radius: 8px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: top 0.6s;
+  z-index: 1;
+  transition: transform .8s ease;
+  box-shadow: 0 2px 8px #a95b7b22;
+}
+
+.envelope-note p {
+  margin: 5px 0;
+  font-size: 15px;
+}
+
+.envelope.open .envelope-flap {
+  transform: rotateX(180deg);
+  z-index: 0;
 }
 
 .envelope.open .envelope-note {
-  top: -65px;
+  transform: translateY(-95px);
+  z-index: 5;
+}
+
+.envelope-hint {
+  font-size: 13px;
+  color: #bd7291;
+  margin-top: 15px;
 }
 
 /* PREGUNTAS */
-
-.question {
-  background: #fff1f6;
-  border: 1px solid #f5c7d9;
-  border-radius: 18px;
-  padding: 15px;
-  margin: 18px 0;
+.question-box {
+  background: #fff3f8;
+  padding: 20px;
+  border-radius: 20px;
+  margin: 20px 0;
+  border: 1px solid #f8d0e0;
 }
 
-.question button {
-  display: block;
-  width: 100%;
-  max-width: 300px;
-  margin: 9px auto;
+.answer-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
 }
 
 /* TOCADISCOS */
-
-.music-dedication {
-  max-width: 400px;
-  margin: 15px auto 25px;
-  color: #985b76;
+.turntable {
+  width: min(340px, 90%);
+  margin: 25px auto;
+  padding: 22px;
+  background: linear-gradient(145deg,#e8b7c9,#c984a2);
+  border: 5px solid #d18ba8;
+  border-radius: 22px;
+  box-shadow: 0 10px 20px #9e587755;
 }
 
-.turntable {
-  width: min(290px, 85vw);
-  height: min(290px, 85vw);
-  margin: 25px auto;
-  background: linear-gradient(145deg, #f8c9da, #e99ab9);
-  border: 10px solid #e9a3bf;
-  border-radius: 25px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.record-area {
   position: relative;
-  box-shadow: 0 12px 25px #bd648844;
+  width: 230px;
+  height: 230px;
+  max-width: 75vw;
+  max-height: 75vw;
+  margin: auto;
 }
 
 .vinyl {
-  width: 73%;
-  aspect-ratio: 1;
+  position: absolute;
+  inset: 0;
   border-radius: 50%;
-  background: repeating-radial-gradient(
-    circle,
-    #25212a 0,
-    #25212a 3px,
-    #39323d 4px,
-    #25212a 6px
-  );
+  background: repeating-radial-gradient(circle,#17151a 0 3px,#29252b 4px 6px,#111 7px 9px);
+  border: 5px solid #302b32;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 3px 8px #0005;
 }
 
 .vinyl.playing {
@@ -235,873 +262,630 @@ textarea {
 }
 
 @keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+  to { transform: rotate(360deg); }
 }
 
 .vinyl-label {
-  width: 36%;
-  aspect-ratio: 1;
+  width: 65px;
+  height: 65px;
   border-radius: 50%;
-  background: radial-gradient(circle, #f8d4e2, #d978a0);
-  color: #85445f;
+  background: #e88db1;
+  border: 4px solid #f8c6d9;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 8px;
-  font-weight: bold;
-  line-height: 1.4;
+  color: white;
+  font-size: 23px;
 }
 
-.vinyl-label small {
-  font-size: 7px;
-}
-
-.tonearm {
+.record-arm {
   position: absolute;
-  width: 34%;
-  height: 7px;
-  background: #fff4f7;
-  border: 2px solid #a96782;
+  top: 0;
+  right: -12px;
+  width: 90px;
+  height: 12px;
+  background: #e7dce1;
+  border: 3px solid #8b6576;
   border-radius: 10px;
-  top: 13%;
-  right: 5%;
-  transform-origin: right center;
-  transform: rotate(-35deg);
-  transition: transform 0.5s;
+  transform-origin: 80px 6px;
+  transform: rotate(-25deg);
+  transition: transform .5s ease;
+  z-index: 3;
 }
 
-.tonearm.playing {
-  transform: rotate(-12deg);
+.record-arm.playing {
+  transform: rotate(8deg);
 }
 
-/* MEDIDOR DE CARIÑO */
-
-.love-number {
-  font-size: 48px;
-  color: #d978a0;
-  font-weight: bold;
-  margin: 20px;
+/* MEDIDOR */
+.love-meter {
+  width: 100%;
+  height: 25px;
+  background: #f8d8e5;
+  border-radius: 30px;
+  overflow: hidden;
+  margin: 25px 0;
 }
 
-.love-message {
-  min-height: 65px;
-  margin: 20px auto;
-  max-width: 400px;
+.love-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg,#f3a4c1,#d75e91);
+  border-radius: 30px;
+  transition: width .25s ease;
 }
 
-/* DIBUJO LIBRE */
+input[type="range"] {
+  width: 100%;
+  accent-color: #dc7ca4;
+}
 
+/* LIENZOS */
 .canvas-wrap {
   width: 100%;
+  max-width: 520px;
+  margin: 20px auto;
+  border: 3px solid #efb3ca;
+  border-radius: 15px;
   overflow: hidden;
-  border: 3px dashed #e8a0bb;
-  border-radius: 18px;
   background: white;
-  margin: 18px auto;
-  touch-action: none;
 }
 
 canvas {
   display: block;
   width: 100%;
   height: auto;
+  background: white;
   touch-action: none;
   cursor: crosshair;
 }
 
-.tools {
+.drawing-tools {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 5px;
-  margin: 12px auto;
 }
 
-.tools button {
-  padding: 9px 15px;
-}
-
-input[type="color"] {
-  width: 48px;
-  height: 40px;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-}
-
-/* RETO DEL GATITO */
-
-.cat-area {
-  position: relative;
-  width: 100%;
-  max-width: 430px;
-  margin: 18px auto;
-  border: 3px dashed #e8a0bb;
-  border-radius: 18px;
-  overflow: hidden;
-  background: #fff7fa;
-  touch-action: none;
-}
-
-.cat-guide {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-#catCanvas {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  background: transparent;
+.color-button {
+  width: 35px;
+  height: 35px;
+  padding: 0;
+  border: 3px solid white;
+  outline: 1px solid #d69ab1;
 }
 
 /* TEMPORIZADOR */
-
 .timer {
-  font-size: 35px;
+  font-size: 42px;
   font-weight: bold;
-  color: #d978a0;
+  color: #d76f9b;
   margin: 15px;
 }
 
-/* CARTITAS */
+.challenge-message {
+  min-height: 45px;
+  color: #bd7291;
+}
 
+/* CARTAS */
 .letter-card {
-  background: #fff3f7;
-  border: 1px solid #f2ccda;
+  background: #fff7fa;
+  border: 1px solid #f2c6d8;
   border-radius: 20px;
-  padding: 20px;
-  margin: 17px 0;
-  box-shadow: 0 5px 15px #d978a01c;
+  padding: 22px;
+  margin: 20px 0;
+  text-align: left;
+  box-shadow: 0 5px 15px #c77d9a18;
+}
+
+.letter-card h3 {
+  text-align: center;
 }
 
 .letter-card p {
-  text-align: left;
-  white-space: pre-line;
+  line-height: 1.85;
 }
 
-.letter-content {
-  display: none;
-  margin-top: 15px;
-  padding-top: 12px;
-  border-top: 1px dashed #e6a1ba;
-}
-
-.letter-content.open {
-  display: block;
-  animation: appear 0.4s ease;
-}
-
-/* PANTALLA FINAL */
-
-.final-heart {
-  font-size: 65px;
-  animation: pulse 1.3s infinite;
-}
-
-@keyframes pulse {
-  50% {
-    transform: scale(1.18);
-  }
-}
-
-footer {
-  margin-top: 30px;
-  color: #c18ba0;
-  font-size: 12px;
+/* RESPONSIVE */
+@media (max-width: 480px) {
+  body { padding: 10px; }
+  .stage { padding: 25px 15px; margin: 15px auto; }
+  h1 { font-size: 28px; }
+  h2 { font-size: 23px; }
+  .envelope-container { height: 180px; }
+  .envelope.open .envelope-note { transform: translateY(-75px); }
 }
 </style>
-</head>
 <body>
 
-<!-- ETAPA 1: BIENVENIDA -->
-<section id="stage1" class="stage active">
-  <div class="heart">♡ ♡ ♡</div>
-  <h1>Hola, Sofi 💗</h1>
-  <p>Preparé algo pequeñito para ti.</p>
-  <p>No es una carta cualquiera...</p>
+<section class="stage active" id="stage1">
+  <h1>Una pequeña sorpresa para ti 💗</h1>
+  <p>Preparé algo con mucho cariño. Antes de comenzar, tendrás que abrir este pequeño sobre.</p>
 
-  <div class="envelope" id="envelope" onclick="openEnvelope()">
-    <div class="envelope-note">
-      Un detallito hecho con cariño
+  <div class="envelope-container" onclick="openEnvelope()">
+    <div class="envelope" id="envelope">
+      <div class="envelope-note">
+        <p>Para Sofi 💌</p>
+        <p>Hay algo especial esperándote...</p>
+      </div>
+      <div class="envelope-body"></div>
+      <div class="envelope-flap"></div>
     </div>
   </div>
 
-  <p id="envelopeText">Toca el sobre para abrirlo.</p>
-
-  <button id="startButton" onclick="showStage(2)" disabled>
-    Comenzar nuestra aventura
-  </button>
-
-  <footer>Hecho especialmente para ti ♡</footer>
+  <p class="envelope-hint" id="envelopeHint">Toca el sobre para abrirlo.</p>
+  <button id="startButton" disabled onclick="nextStage(2)">Comenzar 💗</button>
 </section>
 
-
-<!-- ETAPA 2: PREGUNTAS POP -->
-<section id="stage2" class="stage">
+<section class="stage" id="stage2">
   <h2>Unas preguntitas para ti</h2>
-  <p>Responde con sinceridad... o con lo primero que se te ocurra.</p>
+  <p>Responde con sinceridad. No hay respuestas incorrectas.</p>
 
-  <div class="question">
-    <h3>1. ¿Qué prefieres para una tarde perfecta?</h3>
-    <button onclick="answerPop(1, 'Una tarde tranquila')">Una tarde tranquila</button>
-    <button onclick="answerPop(1, 'Una aventura espontánea')">Una aventura espontánea</button>
-    <button onclick="answerPop(1, 'Un poquito de ambas')">Un poquito de ambas</button>
-    <p id="answer1"></p>
+  <div class="question-box">
+    <h3>1. ¿Qué prefieres para un día perfecto?</h3>
+    <div class="answer-buttons">
+      <button onclick="answerQuestion(this)">Una tarde tranquila</button>
+      <button onclick="answerQuestion(this)">Una aventura espontánea</button>
+      <button onclick="answerQuestion(this)">Un plan con amigos</button>
+    </div>
   </div>
 
-  <div class="question">
-    <h3>2. ¿Qué detalle te hace sonreír?</h3>
-    <button onclick="answerPop(2, 'Un mensaje inesperado')">Un mensaje inesperado</button>
-    <button onclick="answerPop(2, 'Una canción dedicada')">Una canción dedicada</button>
-    <button onclick="answerPop(2, 'Un detalle hecho a mano')">Un detalle hecho a mano</button>
-    <p id="answer2"></p>
+  <div class="question-box">
+    <h3>2. ¿Qué detalle te hace más feliz?</h3>
+    <div class="answer-buttons">
+      <button onclick="answerQuestion(this)">Una carta bonita</button>
+      <button onclick="answerQuestion(this)">Una canción dedicada</button>
+      <button onclick="answerQuestion(this)">Un abrazo inesperado</button>
+    </div>
   </div>
 
-  <div class="question">
-    <h3>3. Si pudieras elegir un plan...</h3>
-    <button onclick="answerPop(3, 'Salir a conocer lugares')">Salir a conocer lugares</button>
-    <button onclick="answerPop(3, 'Ver películas y descansar')">Ver películas y descansar</button>
-    <button onclick="answerPop(3, 'Improvisar algo divertido')">Improvisar algo divertido</button>
-    <p id="answer3"></p>
+  <div class="question-box">
+    <h3>3. ¿Qué elegirías?</h3>
+    <div class="answer-buttons">
+      <button onclick="answerQuestion(this)">Ver las estrellas</button>
+      <button onclick="answerQuestion(this)">Ver una película</button>
+      <button onclick="answerQuestion(this)">Salir a caminar</button>
+    </div>
   </div>
 
-  <div class="question">
-    <h3>4. ¿Qué palabra te representa hoy?</h3>
-    <button onclick="answerPop(4, 'Felicidad')">Felicidad</button>
-    <button onclick="answerPop(4, 'Curiosidad')">Curiosidad</button>
-    <button onclick="answerPop(4, 'Tranquilidad')">Tranquilidad</button>
-    <p id="answer4"></p>
+  <div class="question-box">
+    <h3>4. ¿Qué te gustaría recibir hoy?</h3>
+    <div class="answer-buttons">
+      <button onclick="answerQuestion(this)">Una sorpresa</button>
+      <button onclick="answerQuestion(this)">Palabras bonitas</button>
+      <button onclick="answerQuestion(this)">Un momento especial</button>
+    </div>
   </div>
 
-  <button onclick="showStage(3)">Siguiente sorpresa 💗</button>
+  <button onclick="nextStage(3)">Continuar 💕</button>
 </section>
 
-
-<!-- ETAPA 3: TOCADISCOS -->
-<section id="stage3" class="stage">
-  <h2>Una canción para ti, Sofi</h2>
-
-  <p class="music-dedication">
-    Hay canciones que parecen hechas para recordarnos
-    lo bonita que puede ser una persona.
-    Esta es una de ellas.
-
-    Quería que tuvieras un pequeño momento musical
-    dentro de esta carta.
-  </p>
+<section class="stage" id="stage3">
+  <h2>Una canción para ti 🎶</h2>
+  <p>Hay canciones que transmiten cosas que a veces no sabemos explicar con palabras.</p>
 
   <div class="turntable">
-    <div class="vinyl" id="vinyl">
-      <div class="vinyl-label">
-        <span>JUST THE WAY</span>
-        <span>YOU ARE</span>
-        <small>BRUNO MARS</small>
+    <div class="record-area">
+      <div class="vinyl" id="vinyl">
+        <div class="vinyl-label">💗</div>
       </div>
+      <div class="record-arm" id="recordArm"></div>
     </div>
-    <div class="tonearm" id="tonearm"></div>
   </div>
 
   <h3>Just the Way You Are</h3>
   <p>Bruno Mars</p>
+  <button id="musicButton" onclick="toggleMusic()">▶ Reproducir</button>
+  <p id="musicStatus">Presiona reproducir para escucharla.</p>
+  <button onclick="nextStage(4)">Continuar 💗</button>
 
   <audio id="loveSong" preload="metadata">
-    <source src="audio/just-the-way-you-are.mp3" type="audio/mpeg">
+    <source src="just-the-way-you-are.mp3" type="audio/mpeg">
   </audio>
-
-  <p id="musicStatus">Una canción especial para escuchar con calma.</p>
-
-  <button id="musicButton" onclick="toggleMusic()">
-    ▶ Reproducir
-  </button>
-
-  <button class="secondary" onclick="showStage(4)">
-    Continuar 💗
-  </button>
 </section>
 
+<section class="stage" id="stage4">
+  <h2>Un medidor de cariño</h2>
+  <p>¿Qué tanto cariño tienes hoy? Mueve el indicador hasta donde quieras.</p>
 
-<!-- ETAPA 4: MEDIDOR DE CARIÑO -->
-<section id="stage4" class="stage">
-  <h2>Una pregunta importante...</h2>
-
-  <p>
-    ¿Qué tanto cariño crees que cabe en esta pequeña carta?
-  </p>
-
-  <div class="love-number">
-    <span id="loveValue">50</span>%
+  <div class="love-meter">
+    <div class="love-fill" id="loveFill"></div>
   </div>
 
-  <input
-    type="range"
-    id="loveSlider"
-    min="0"
-    max="100"
-    value="50"
-    oninput="updateLove()"
-  >
+  <h2 id="loveValue">50%</h2>
+  <input type="range" id="loveRange" min="0" max="100" value="50"
+    oninput="updateLove(this.value)">
 
-  <p id="loveMessage" class="love-message">
-    Creo que todavía hay mucho cariño por descubrir.
-  </p>
-
-  <button onclick="showStage(5)">
-    ¡Siguiente sorpresa!
-  </button>
+  <p id="loveMessage">¡Qué bonito tener un poquito de cariño para compartir!</p>
+  <button onclick="nextStage(5)">Continuar 💕</button>
 </section>
 
-
-<!-- ETAPA 5: DIBUJO LIBRE -->
-<section id="stage5" class="stage">
-  <h2>Un espacio para tu creatividad</h2>
-
-  <p>
-    Puedes dibujar lo que quieras.
-    No importa si queda bonito, lo importante es que sea tuyo.
-  </p>
+<section class="stage" id="stage5">
+  <h2>Un espacio para dibujar</h2>
+  <p>Ahora puedes dibujar lo que quieras. No importa si no queda perfecto.</p>
 
   <div class="canvas-wrap">
-    <canvas id="drawingCanvas" width="700" height="420"></canvas>
+    <canvas id="freeCanvas" width="700" height="420"></canvas>
   </div>
 
-  <div class="tools">
-    <label>
-      Color:
-      <input type="color" id="drawColor" value="#e88db1">
-    </label>
-
-    <button onclick="setEraser(false)">Lápiz</button>
-    <button onclick="setEraser(true)">Borrador</button>
-    <button class="secondary" onclick="clearDrawing()">Limpiar</button>
+  <div class="drawing-tools">
+    <button class="color-button" style="background:#e85d8e" onclick="setColor('#e85d8e')"></button>
+    <button class="color-button" style="background:#8b65c7" onclick="setColor('#8b65c7')"></button>
+    <button class="color-button" style="background:#4b9cba" onclick="setColor('#4b9cba')"></button>
+    <button class="color-button" style="background:#333333" onclick="setColor('#333333')"></button>
+    <button class="secondary" onclick="setColor('#ffffff')">Borrador</button>
+    <button class="secondary" onclick="clearCanvas('freeCanvas')">Limpiar</button>
   </div>
 
-  <button onclick="saveDrawing()">
-    Guardar mi dibujo 💗
-  </button>
+  <button onclick="nextStage(6)">Guardar y continuar 💗</button>
 </section>
 
-
-<!-- ETAPA 6: RETO DEL GATITO -->
-<section id="stage6" class="stage">
-  <h2>¡Un pequeño reto!</h2>
-
-  <p>
-    Este gatito necesita un poquito de tu talento artístico.
-    Dibuja encima de la silueta antes de que termine el tiempo.
-  </p>
+<section class="stage" id="stage6">
+  <h2>Un pequeño reto creativo</h2>
+  <p>Tienes 30 segundos para dibujar lo primero que se te ocurra. ¡Deja volar tu imaginación!</p>
 
   <div class="timer" id="timer">30</div>
 
-  <div class="cat-area">
-    <svg class="cat-guide" viewBox="0 0 400 400"
-         xmlns="http://www.w3.org/2000/svg">
-      <g fill="#f6c5d8" stroke="#d978a0" stroke-width="5"
-         stroke-linejoin="round">
-        <path d="M90 145 L105 45 L180 105
-                 Q200 95 220 105 L295 45 L310 145
-                 Q350 185 340 250
-                 Q330 335 200 345
-                 Q70 335 60 250
-                 Q50 185 90 145 Z"/>
-      </g>
-      <g fill="#a95b7c">
-        <ellipse cx="145" cy="205" rx="12" ry="17"/>
-        <ellipse cx="255" cy="205" rx="12" ry="17"/>
-        <path d="M190 238 Q200 250 210 238 Q200 260 190 238"/>
-      </g>
-      <g fill="none" stroke="#a95b7c" stroke-width="4"
-         stroke-linecap="round">
-        <path d="M180 265 Q200 280 220 265"/>
-        <path d="M135 240 L75 230 M135 255 L75 260"/>
-        <path d="M265 240 L325 230 M265 255 L325 260"/>
-      </g>
-    </svg>
-
+  <div class="canvas-wrap">
     <canvas id="catCanvas" width="400" height="400"></canvas>
   </div>
 
-  <button id="catStartButton" onclick="startCatChallenge()">
-    Comenzar reto
-  </button>
+  <p class="challenge-message" id="challengeMessage">Cuando estés lista, inicia el reto.</p>
 
-  <button class="secondary" onclick="clearCatDrawing()">
-    Limpiar dibujo
-  </button>
-
-  <p id="catMessage">
-    Tienes 30 segundos. ¡Tú puedes!
-  </p>
-
-  <button id="catContinue" class="hidden" onclick="showStage(7)">
-    Terminé mi obra maestra 💗
-  </button>
+  <button id="timerButton" onclick="startChallenge()">Iniciar reto</button>
+  <button class="secondary" onclick="clearCanvas('catCanvas')">Limpiar dibujo</button>
+  <button id="challengeContinue" class="hidden" onclick="nextStage(7)">Terminé 💕</button>
 </section>
 
-
-<!-- ETAPA 7: CARTITAS -->
-<section id="stage7" class="stage">
-  <h2>Tres pequeños mensajes para ti</h2>
-
-  <p>
-    Llegamos a una de mis partes favoritas.
-    Abrí cada cartita cuando quieras.
-  </p>
+<section class="stage" id="stage7">
+  <h2>Tres pequeñas cartas para ti</h2>
+  <p>Quería dejarte algunas palabras que espero que puedas guardar con cariño.</p>
 
   <div class="letter-card">
-    <h3>♡ Lo bonito de coincidir</h3>
-    <button onclick="toggleLetter(1)">Abrir cartita</button>
-
-    <div id="letter1" class="letter-content">
-      <p>
-        A veces la vida tiene formas muy curiosas de hacer
-        que dos personas coincidan.
-
-        No siempre hace falta conocer a alguien desde hace
-        muchísimo tiempo para encontrar algo especial en esa
-        persona. A veces basta una conversación, una sonrisa
-        o un pequeño momento para que alguien comience a
-        ocupar un lugar bonito en nuestros pensamientos.
-
-        Me parece bonito poder coincidir contigo, conocer
-        poquito a poquito tu forma de ser y descubrir esos
-        detalles que te hacen única.
-
-        Ojalá nunca dejes de ser tú misma, porque precisamente
-        eso es lo que hace especial a una persona.
-
-        Y si algo me gustaría que supieras es que me alegra
-        haber coincidido contigo. 💗
-      </p>
-    </div>
+    <h3>1. Lo bonito de coincidir</h3>
+    <p>
+      A veces la vida nos sorprende poniendo personas en nuestro camino sin que
+      lo tengamos planeado. Y creo que una de las cosas bonitas de conocer a
+      alguien es descubrir poco a poco su manera de ser, sus ocurrencias, sus
+      gustos y esas pequeñas cosas que la hacen diferente.
+    </p>
+    <p>
+      Me parece bonito poder coincidir contigo, compartir conversaciones y
+      encontrar motivos para sonreír incluso en los momentos más sencillos.
+      No hace falta que todo sea extraordinario para que un momento se vuelva
+      especial; a veces basta con una buena plática o una sonrisa.
+    </p>
+    <p>
+      Espero que nunca sientas que tienes que cambiar tu forma de ser para
+      agradarle a alguien. Tu esencia también está en tus detalles, en tus
+      ocurrencias y en aquello que te hace ser tú. Me alegra haber coincidido
+      contigo, Sofi. 💗
+    </p>
   </div>
 
   <div class="letter-card">
-    <h3>♡ Ojalá nunca te falten motivos</h3>
-    <button onclick="toggleLetter(2)">Abrir cartita</button>
-
-    <div id="letter2" class="letter-content">
-      <p>
-        Ojalá nunca te falten motivos para sonreír.
-
-        Que siempre encuentres una canción que te alegre
-        el día, una persona con quien puedas hablar de todo
-        y momentos que te hagan olvidar por un ratito
-        cualquier preocupación.
-
-        Ojalá tengas días tranquilos, sueños que te emocionen
-        y muchas oportunidades para descubrir cosas nuevas.
-
-        También espero que nunca olvides lo valiosa que eres.
-        Que no tengas que cambiar tu forma de ser para
-        sentirte suficiente y que siempre encuentres personas
-        que sepan apreciar lo bonito que hay en ti.
-
-        No todos los días tienen que ser perfectos.
-        A veces basta con encontrar algo pequeño que nos
-        recuerde que también hay cosas bonitas en la vida.
-
-        Y deseo que tengas muchísimas de esas cosas. 💗
-      </p>
-    </div>
+    <h3>2. Ojalá nunca te falten motivos</h3>
+    <p>
+      Ojalá nunca te falten motivos para sonreír, canciones que te hagan sentir
+      bien, personas con quienes puedas hablar de cualquier cosa y momentos en
+      los que simplemente puedas disfrutar de estar aquí.
+    </p>
+    <p>
+      Ojalá también tengas días tranquilos cuando los necesites, oportunidades
+      para cumplir tus sueños y fuerza para seguir adelante cuando las cosas no
+      salgan como esperabas. No todos los días tienen que ser perfectos y no
+      siempre tienes que poder con todo.
+    </p>
+    <p>
+      Recuerda que eres una persona valiosa, incluso en esos días en los que
+      quizá no lo sientas tanto. Mereces cosas bonitas, cariño sincero y gente
+      que te recuerde lo especial que eres sin que tengas que pedirlo.
+    </p>
   </div>
 
   <div class="letter-card">
-    <h3>♡ Un último detallito para ti</h3>
-    <button onclick="toggleLetter(3)">Abrir cartita</button>
-
-    <div id="letter3" class="letter-content">
-      <p>
-        Bueno, Sofi... llegamos al final de esta pequeña
-        aventura.
-
-        Quería hacer algo diferente, algo que no fuera
-        solamente escribir unas cuantas palabras y enviarlas.
-        Por eso preparé las preguntas, el tocadiscos,
-        los dibujos y hasta el pequeño reto del gatito.
-
-        Quizá algunas cosas quedaron un poquito improvisadas,
-        pero cada parte fue pensada para sacarte una sonrisa
-        y regalarte un momento agradable.
-
-        Gracias por formar parte de este pequeño detalle.
-        Espero que hayas disfrutado cada sorpresa y que,
-        cuando vuelvas a recordar esta carta, te quede
-        una sensación bonita.
-
-        Nunca olvides que mereces cariño, respeto,
-        tranquilidad y personas que te hagan sentir bien.
-
-        Y, por último, quiero decirte algo:
-
-        Eres la mejor personita, Sofi. 💗
-      </p>
-    </div>
+    <h3>3. Un último detallito para ti</h3>
+    <p>
+      Preparé esta pequeña página pensando en ti. Quería que fuera algo más que
+      un simple mensaje: por eso agregué unas preguntas, un tocadiscos con una
+      canción, un medidor de cariño, un espacio para dibujar y hasta un pequeño
+      reto.
+    </p>
+    <p>
+      Quizá sean detalles sencillos, pero cada uno forma parte de algo que hice
+      con ilusión. Gracias por tomarte el tiempo de recorrerlo y participar.
+      Espero que al menos te haya sacado una sonrisa.
+    </p>
+    <p>
+      No olvides que mereces recibir el mismo cariño bonito que das y que
+      siempre hay algo especial en tu manera de ser.
+    </p>
+    <p><strong>Eres la mejor personita, Sofi. 💗</strong></p>
   </div>
 
-  <button onclick="showStage(8)">
-    Ver el último mensaje
-  </button>
+  <button onclick="nextStage(8)">Una última sorpresa ✨</button>
 </section>
 
-
-<!-- PANTALLA FINAL -->
-<section id="stage8" class="stage">
-  <div class="final-heart">💗</div>
-
-  <h1>¡Eso es todo, Sofi!</h1>
-
+<section class="stage" id="stage8">
+  <h1>¡Esto era para ti, Sofi! 💗</h1>
   <p>
-    Espero que esta pequeña sorpresa te haya sacado
-    al menos una sonrisa.
+    Espero que hayas disfrutado cada pequeño detalle. Gracias por llegar hasta
+    aquí y regalarme un ratito de tu tiempo.
   </p>
+  <h2>Con mucho cariño. 💌</h2>
+  <p>Fin... aunque las cosas bonitas no siempre necesitan un final.</p>
+  <div style="font-size:55px;margin:25px;">💗 🌷 💗</div>
+      </section>
+      <script>
+/* NAVEGACIÓN ENTRE ETAPAS */
+let currentStage = 1;
 
-  <p>
-    Gracias por tomarte el tiempo de llegar hasta aquí.
-    Te mando un abrazo enorme.
-  </p>
+function nextStage(number) {
+  const current = document.getElementById("stage" + currentStage);
+  if (current) current.classList.remove("active");
 
-  <h2>Con mucho cariño ♡</h2>
+  if (currentStage === 3 && number !== 3) {
+    stopMusic();
+  }
 
-  <p class="small-text">
-    Fin de esta pequeña aventura.
-  </p>
+  currentStage = number;
+  const next = document.getElementById("stage" + currentStage);
 
-  <button onclick="location.reload()">
-    Volver a comenzar
-  </button>
-          </section>
-          <script>
-/* CAMBIO DE PANTALLAS */
-
-function showStage(number) {
-  document.querySelectorAll(".stage").forEach(stage => {
-    stage.classList.remove("active");
-  });
-
-  const next = document.getElementById("stage" + number);
   if (next) {
     next.classList.add("active");
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
-
-  if (number === 5) setupCanvas();
-  if (number === 6) setupCatCanvas();
-
-  if (number !== 3) {
-    pauseMusic();
-  }
 }
 
+/* CORAZONES FLOTANTES */
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.textContent = "♥";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (4 + Math.random() * 3) + "s";
 
-/* SOBRE DE BIENVENIDA */
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 7000);
+}
+
+setInterval(createHeart, 1300);
+
+/* SOBRE */
+let envelopeOpened = false;
 
 function openEnvelope() {
-  const envelope = document.getElementById("envelope");
+  if (envelopeOpened) return;
 
-  envelope.classList.add("open");
+  envelopeOpened = true;
 
-  document.getElementById("envelopeText").textContent =
-    "¡Sorpresa! Preparé esto especialmente para ti. 💗";
+  document.getElementById("envelope").classList.add("open");
+  document.getElementById("envelopeHint").textContent =
+    "¡Sorpresa! Tu pequeña aventura está lista. 💗";
 
   document.getElementById("startButton").disabled = false;
 }
 
-
 /* PREGUNTAS */
+function answerQuestion(button) {
+  const container = button.parentElement;
 
-const popAnswers = {};
+  container.querySelectorAll("button").forEach(item => {
+    item.style.background = "#f4c1d5";
+    item.style.color = "#874b67";
+  });
 
-function answerPop(question, answer) {
-  popAnswers[question] = answer;
-
-  const reactions = [
-    "",
-    "¡Qué bonita elección! 💗",
-    "Me gusta esa respuesta.",
-    "Suena como un plan perfecto.",
-    "¡Espero que tengas muchos días así!"
-  ];
-
-  document.getElementById("answer" + question).textContent =
-    answer + " — " + reactions[question];
+  button.style.background = "#c45c88";
+  button.style.color = "white";
 }
 
-
-/* TOCADISCOS Y AUDIO */
-
+/* MÚSICA Y TOCADISCOS */
 const loveSong = document.getElementById("loveSong");
-const vinyl = document.getElementById("vinyl");
-const tonearm = document.getElementById("tonearm");
 const musicButton = document.getElementById("musicButton");
+const vinyl = document.getElementById("vinyl");
+const recordArm = document.getElementById("recordArm");
+const musicStatus = document.getElementById("musicStatus");
 
-function toggleMusic() {
+function updateMusicAppearance(playing) {
+  vinyl.classList.toggle("playing", playing);
+  recordArm.classList.toggle("playing", playing);
+  musicButton.textContent = playing ? "Ⅱ Pausar" : "▶ Reproducir";
+}
+
+async function toggleMusic() {
   if (loveSong.paused) {
-    loveSong.play().then(() => {
-      vinyl.classList.add("playing");
-      tonearm.classList.add("playing");
-      musicButton.textContent = "⏸ Pausar";
-      document.getElementById("musicStatus").textContent =
-        "Reproduciendo para ti...";
-    }).catch(() => {
-      document.getElementById("musicStatus").textContent =
-        "No se pudo reproducir. Revisa que el MP3 esté en la carpeta audio.";
-    });
+    musicStatus.textContent = "Cargando canción...";
+
+    try {
+      await loveSong.play();
+      updateMusicAppearance(true);
+      musicStatus.textContent = "Reproduciendo: Just the Way You Are 💗";
+    } catch (error) {
+      updateMusicAppearance(false);
+      musicStatus.textContent =
+        "No se pudo reproducir. Comprueba que el MP3 esté en la raíz del repositorio.";
+    }
   } else {
-    pauseMusic();
+    loveSong.pause();
   }
 }
 
-function pauseMusic() {
-  if (!loveSong) return;
-
+function stopMusic() {
   loveSong.pause();
-  vinyl.classList.remove("playing");
-  tonearm.classList.remove("playing");
-  musicButton.textContent = "▶ Reproducir";
-  document.getElementById("musicStatus").textContent =
-    "Una canción especial para escuchar con calma.";
+  loveSong.currentTime = 0;
+  updateMusicAppearance(false);
+  musicStatus.textContent = "Presiona reproducir para escucharla.";
 }
 
-loveSong.addEventListener("ended", () => {
-  pauseMusic();
+loveSong.addEventListener("pause", () => {
+  updateMusicAppearance(false);
 });
 
+loveSong.addEventListener("ended", () => {
+  updateMusicAppearance(false);
+  musicStatus.textContent = "Espero que hayas disfrutado la canción. 💗";
+});
+
+loveSong.addEventListener("error", () => {
+  musicStatus.textContent =
+    "No se encontró el archivo de música. Revisa el nombre y la ubicación del MP3.";
+  updateMusicAppearance(false);
+});
 
 /* MEDIDOR DE CARIÑO */
+function updateLove(value) {
+  const percentage = Number(value);
 
-function updateLove() {
-  const value = Number(document.getElementById("loveSlider").value);
+  document.getElementById("loveValue").textContent = percentage + "%";
+  document.getElementById("loveFill").style.width = percentage + "%";
 
-  document.getElementById("loveValue").textContent = value;
+  let message;
 
-  let message = "";
-
-  if (value <= 20) {
-    message = "¡Jajaja! Bueno, tendremos que seguir acumulando momentos bonitos.";
-  } else if (value <= 40) {
-    message = "Un poquito de cariño ya es suficiente para comenzar algo bonito.";
-  } else if (value <= 60) {
-    message = "¡Eso ya es bastante! Espero que esta carta te saque una sonrisa.";
-  } else if (value <= 80) {
-    message = "¡Qué bonito! Te mando una dosis extra de cariño.";
+  if (percentage <= 20) {
+    message = "¡Un poquito también cuenta! 💗";
+  } else if (percentage <= 50) {
+    message = "¡Qué bonito tener cariño para compartir!";
+  } else if (percentage <= 80) {
+    message = "¡Eso ya es bastante cariño! 🌷";
   } else {
-    message = "¡Muchísimo cariño! Esta sorpresa se queda cortita.";
+    message = "¡Muchísimo cariño! Que nunca te falte. 💕";
   }
 
   document.getElementById("loveMessage").textContent = message;
 }
 
+/* FUNCIONES GENERALES PARA LOS LIENZOS */
+let currentColor = "#e85d8e";
+let drawingStates = {};
 
-/* DIBUJO LIBRE */
-
-let drawingCanvas = document.getElementById("drawingCanvas");
-let drawingCtx = drawingCanvas.getContext("2d");
-let drawing = false;
-let eraser = false;
-let drawingReady = false;
-
-function setupCanvas() {
-  if (drawingReady) return;
-  drawingReady = true;
-
-  drawingCtx.lineWidth = 5;
-  drawingCtx.lineCap = "round";
-  drawingCtx.lineJoin = "round";
-  drawingCtx.strokeStyle = "#e88db1";
-
-  drawingCanvas.addEventListener("pointerdown", startDrawing);
-  drawingCanvas.addEventListener("pointermove", draw);
-  drawingCanvas.addEventListener("pointerup", stopDrawing);
-  drawingCanvas.addEventListener("pointercancel", stopDrawing);
-  drawingCanvas.addEventListener("pointerleave", stopDrawing);
-}
-
-function getPosition(event, canvas) {
+function getCanvasPosition(event, canvas) {
   const rect = canvas.getBoundingClientRect();
 
   return {
-    x: (event.clientX - rect.left) * canvas.width / rect.width,
-    y: (event.clientY - rect.top) * canvas.height / rect.height
+    x: (event.clientX - rect.left) * (canvas.width / rect.width),
+    y: (event.clientY - rect.top) * (canvas.height / rect.height)
   };
 }
 
-function startDrawing(event) {
-  drawing = true;
-  drawingCanvas.setPointerCapture(event.pointerId);
+function setupCanvas(canvasId) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
 
-  const pos = getPosition(event, drawingCanvas);
+  const ctx = canvas.getContext("2d");
 
-  drawingCtx.beginPath();
-  drawingCtx.moveTo(pos.x, pos.y);
+  ctx.lineWidth = 4;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+
+  drawingStates[canvasId] = {
+    drawing: false,
+    lastX: 0,
+    lastY: 0
+  };
+
+  canvas.addEventListener("pointerdown", event => {
+    event.preventDefault();
+
+    const state = drawingStates[canvasId];
+    const position = getCanvasPosition(event, canvas);
+
+    state.drawing = true;
+    state.lastX = position.x;
+    state.lastY = position.y;
+
+    canvas.setPointerCapture(event.pointerId);
+
+    ctx.beginPath();
+    ctx.arc(position.x, position.y, ctx.lineWidth / 2, 0, Math.PI * 2);
+    ctx.fillStyle = currentColor;
+    ctx.fill();
+  });
+
+  canvas.addEventListener("pointermove", event => {
+    const state = drawingStates[canvasId];
+    if (!state.drawing) return;
+
+    event.preventDefault();
+
+    const position = getCanvasPosition(event, canvas);
+
+    ctx.beginPath();
+    ctx.moveTo(state.lastX, state.lastY);
+    ctx.lineTo(position.x, position.y);
+    ctx.strokeStyle = currentColor;
+    ctx.lineWidth = currentColor === "#ffffff" ? 18 : 4;
+    ctx.stroke();
+
+    state.lastX = position.x;
+    state.lastY = position.y;
+  });
+
+  function stopDrawing() {
+    drawingStates[canvasId].drawing = false;
+  }
+
+  canvas.addEventListener("pointerup", stopDrawing);
+  canvas.addEventListener("pointercancel", stopDrawing);
+  canvas.addEventListener("pointerleave", event => {
+    if (!canvas.hasPointerCapture(event.pointerId)) {
+      stopDrawing();
+    }
+  });
 }
 
-function draw(event) {
-  if (!drawing) return;
-
-  const pos = getPosition(event, drawingCanvas);
-
-  drawingCtx.strokeStyle = eraser
-    ? "#ffffff"
-    : document.getElementById("drawColor").value;
-
-  drawingCtx.lineWidth = eraser ? 24 : 5;
-
-  drawingCtx.lineTo(pos.x, pos.y);
-  drawingCtx.stroke();
+function setColor(color) {
+  currentColor = color;
 }
 
-function stopDrawing() {
-  drawing = false;
-  drawingCtx.beginPath();
+function clearCanvas(canvasId) {
+  const canvas = document.getElementById(canvasId);
+  const ctx = canvas.getContext("2d");
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
-function setEraser(value) {
-  eraser = value;
-}
+/* RETO DE 30 SEGUNDOS */
+let challengeTime = 30;
+let challengeInterval = null;
 
-function clearDrawing() {
-  drawingCtx.clearRect(
-    0, 0, drawingCanvas.width, drawingCanvas.height
-  );
-}
+function startChallenge() {
+  if (challengeInterval !== null) return;
 
-function saveDrawing() {
-  showStage(6);
-}
+  const timerButton = document.getElementById("timerButton");
+  const timerDisplay = document.getElementById("timer");
+  const message = document.getElementById("challengeMessage");
 
+  challengeTime = 30;
+  timerDisplay.textContent = challengeTime;
+  timerButton.disabled = true;
+  message.textContent = "¡A dibujar! El tiempo está corriendo.";
 
-/* RETO DEL GATITO */
+  challengeInterval = setInterval(() => {
+    challengeTime--;
+    timerDisplay.textContent = challengeTime;
 
-const catCanvas = document.getElementById("catCanvas");
-const catCtx = catCanvas.getContext("2d");
+    if (challengeTime <= 0) {
+      clearInterval(challengeInterval);
+      challengeInterval = null;
 
-let catDrawing = false;
-let catReady = false;
-let catTimer = null;
-let catSeconds = 30;
-let catFinished = false;
+      timerButton.disabled = false;
+      timerButton.textContent = "Volver a intentar";
+      document.getElementById("challengeContinue").classList.remove("hidden");
 
-function setupCatCanvas() {
-  if (catReady) return;
-  catReady = true;
-
-  catCtx.lineWidth = 5;
-  catCtx.lineCap = "round";
-  catCtx.lineJoin = "round";
-  catCtx.strokeStyle = "#d978a0";
-
-  catCanvas.addEventListener("pointerdown", startCatDrawing);
-  catCanvas.addEventListener("pointermove", drawCat);
-  catCanvas.addEventListener("pointerup", stopCatDrawing);
-  catCanvas.addEventListener("pointercancel", stopCatDrawing);
-  catCanvas.addEventListener("pointerleave", stopCatDrawing);
-}
-
-function startCatDrawing(event) {
-  if (!catTimer || catFinished) return;
-
-  catDrawing = true;
-  catCanvas.setPointerCapture(event.pointerId);
-
-  const pos = getPosition(event, catCanvas);
-
-  catCtx.beginPath();
-  catCtx.moveTo(pos.x, pos.y);
-}
-
-function drawCat(event) {
-  if (!catDrawing || catFinished) return;
-
-  const pos = getPosition(event, catCanvas);
-
-  catCtx.lineTo(pos.x, pos.y);
-  catCtx.stroke();
-}
-
-function stopCatDrawing() {
-  catDrawing = false;
-  catCtx.beginPath();
-}
-
-function clearCatDrawing() {
-  catCtx.clearRect(0, 0, catCanvas.width, catCanvas.height);
-}
-
-function startCatChallenge() {
-  if (catTimer || catFinished) return;
-
-  catSeconds = 30;
-
-  document.getElementById("catStartButton").disabled = true;
-  document.getElementById("catMessage").textContent =
-    "¡A dibujar! El tiempo comienza ahora.";
-
-  document.getElementById("timer").textContent = catSeconds;
-
-  catTimer = setInterval(() => {
-    catSeconds--;
-
-    document.getElementById("timer").textContent = catSeconds;
-
-    if (catSeconds <= 0) {
-      finishCatChallenge();
+      message.textContent =
+        "¡Tiempo terminado! Espero que te hayas divertido dibujando. 💗";
     }
   }, 1000);
 }
 
-function finishCatChallenge() {
-  clearInterval(catTimer);
-  catTimer = null;
-  catFinished = true;
-
-  document.getElementById("timer").textContent = "¡Tiempo!";
-  document.getElementById("catMessage").textContent =
-    "¡JAJA! Tu gatito es una obra de arte. Me encanta tu creatividad. 💗";
-
-  document.getElementById("catStartButton").classList.add("hidden");
-  document.getElementById("catContinue").classList.remove("hidden");
-}
-
-
-/* CARTITAS */
-
-function toggleLetter(number) {
-  const letter = document.getElementById("letter" + number);
-
-  letter.classList.toggle("open");
-}
-
-
-/* CORAZONES FLOTANTES */
-
-function createHeart() {
-  const heart = document.createElement("div");
-
-  heart.className = "heart";
-  heart.textContent = Math.random() > 0.5 ? "♡" : "♥";
-
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.fontSize = (15 + Math.random() * 20) + "px";
-  heart.style.animationDuration = (4 + Math.random() * 4) + "s";
-
-  document.body.appendChild(heart);
-
-  setTimeout(() => heart.remove(), 8000);
-}
-
-setInterval(createHeart, 1800);
-
-
-/* INICIO */
-
-updateLove();
+/* INICIALIZACIÓN */
+document.addEventListener("DOMContentLoaded", () => {
+  setupCanvas("freeCanvas");
+  setupCanvas("catCanvas");
+  updateLove(50);
+});
 </script>
 
 </body>
