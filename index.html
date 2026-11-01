@@ -8,708 +8,1100 @@
 <style>
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 body {
-  font-family: Georgia, serif;
-  background: linear-gradient(135deg, #ffe1ed, #fff0f5, #ffd1e2);
-  color: #8e4262;
-  min-height: 100vh;
+  margin: 0;
   padding: 20px;
+  min-height: 100vh;
+  font-family: 'Trebuchet MS', Arial, sans-serif;
+  background: linear-gradient(135deg, #ffe0ec, #fff0f5, #ffd6e5);
+  color: #874b67;
+  text-align: center;
+  overflow-x: hidden;
 }
 
-.card {
+.stage {
+  display: none;
+  width: 100%;
   max-width: 520px;
-  margin: 35px auto;
-  padding: 28px 22px;
-  background: rgba(255,255,255,.88);
-  border: 1px solid #ffd0e0;
+  margin: 30px auto;
+  padding: 28px 20px;
+  background: rgba(255,255,255,0.85);
+  border: 2px solid #ffd0e1;
   border-radius: 25px;
-  box-shadow: 0 10px 35px rgba(185,85,125,.13);
-  text-align: center;
+  box-shadow: 0 8px 25px rgba(190, 100, 140, 0.15);
+  animation: appear 0.5s ease;
+}
+
+.stage.active {
+  display: block;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+h1, h2, h3 {
+  color: #c45c88;
+}
+
+h1 {
+  font-size: 30px;
+}
+
+h2 {
+  font-size: 25px;
+}
+
+p {
+  line-height: 1.7;
+}
+
+button {
+  border: none;
+  border-radius: 30px;
+  padding: 13px 22px;
+  margin: 8px 5px;
+  background: #e88db1;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 10px #d88aaa55;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #d76f9b;
+  transform: scale(1.04);
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+.secondary {
+  background: #f4c1d5;
+  color: #874b67;
+}
+
+input[type="range"] {
+  width: 90%;
+  accent-color: #df80a7;
+  margin: 20px 0;
+}
+
+textarea {
+  width: 100%;
+  border: 2px solid #f2bfd3;
+  border-radius: 15px;
+  padding: 12px;
+  font-family: inherit;
+  resize: vertical;
 }
 
 .hidden {
   display: none !important;
 }
 
-h1 {
-  color: #c0527d;
-  font-size: 29px;
-  margin-bottom: 18px;
-}
-
-h2 {
-  color: #c0527d;
-  font-size: 23px;
-  margin-bottom: 15px;
-}
-
-p {
-  line-height: 1.7;
-  margin: 12px 0;
-}
-
-button {
-  border: none;
-  border-radius: 22px;
-  background: #e98caf;
-  color: white;
-  padding: 13px 20px;
-  margin: 8px 4px;
-  font-size: 15px;
-  cursor: pointer;
-  font-family: inherit;
-  transition: .2s;
-}
-
-button:active {
-  transform: scale(.96);
-}
-
-button:disabled {
-  opacity: .4;
-  cursor: not-allowed;
-}
-
-.secondary {
-  background: #f6d0df;
-  color: #984866;
-}
-
-.small {
-  font-size: 13px;
-  opacity: .8;
-}
-
 .heart {
-  color: #e98caf;
-  font-size: 42px;
-  margin: 12px;
+  position: fixed;
+  bottom: -30px;
+  color: #e88db1;
+  font-size: 20px;
+  pointer-events: none;
+  animation: floatHeart 6s linear forwards;
+  z-index: 10;
 }
 
-.message-option {
+@keyframes floatHeart {
+  to {
+    transform: translateY(-110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+  /* SOBRE DE BIENVENIDA */
+
+.envelope {
+  width: 210px;
+  height: 140px;
+  margin: 45px auto 25px;
+  position: relative;
+  background: #e88db1;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px #d88aaa55;
+}
+
+.envelope::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #f5b8cf;
+  clip-path: polygon(0 0, 50% 60%, 100% 0);
+  transform-origin: top;
+  transition: transform 0.6s;
+  z-index: 2;
+}
+
+.envelope.open::before {
+  transform: rotateX(180deg);
+}
+
+.envelope-note {
+  position: absolute;
+  width: 85%;
+  height: 110px;
+  top: 10px;
+  left: 7.5%;
+  background: white;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: top 0.6s;
+}
+
+.envelope.open .envelope-note {
+  top: -65px;
+}
+
+/* PREGUNTAS */
+
+.question {
+  background: #fff1f6;
+  border: 1px solid #f5c7d9;
+  border-radius: 18px;
+  padding: 15px;
+  margin: 18px 0;
+}
+
+.question button {
   display: block;
   width: 100%;
-  margin: 10px 0;
-  background: #f8d6e3;
-  color: #914766;
+  max-width: 300px;
+  margin: 9px auto;
 }
 
-.result {
-  background: #fff0f5;
-  border-radius: 15px;
-  padding: 17px;
-  margin-top: 18px;
+/* TOCADISCOS */
+
+.music-dedication {
+  max-width: 400px;
+  margin: 15px auto 25px;
+  color: #985b76;
+}
+
+.turntable {
+  width: min(290px, 85vw);
+  height: min(290px, 85vw);
+  margin: 25px auto;
+  background: linear-gradient(145deg, #f8c9da, #e99ab9);
+  border: 10px solid #e9a3bf;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 12px 25px #bd648844;
+}
+
+.vinyl {
+  width: 73%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: repeating-radial-gradient(
+    circle,
+    #25212a 0,
+    #25212a 3px,
+    #39323d 4px,
+    #25212a 6px
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 8px #0005;
+}
+
+.vinyl.playing {
+  animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.vinyl-label {
+  width: 36%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, #f8d4e2, #d978a0);
+  color: #85445f;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+  font-weight: bold;
+  line-height: 1.4;
+}
+
+.vinyl-label small {
+  font-size: 7px;
+}
+
+.tonearm {
+  position: absolute;
+  width: 34%;
+  height: 7px;
+  background: #fff4f7;
+  border: 2px solid #a96782;
+  border-radius: 10px;
+  top: 13%;
+  right: 5%;
+  transform-origin: right center;
+  transform: rotate(-35deg);
+  transition: transform 0.5s;
+}
+
+.tonearm.playing {
+  transform: rotate(-12deg);
+}
+
+/* MEDIDOR DE CARIÑO */
+
+.love-number {
+  font-size: 48px;
+  color: #d978a0;
+  font-weight: bold;
+  margin: 20px;
+}
+
+.love-message {
   min-height: 65px;
+  margin: 20px auto;
+  max-width: 400px;
 }
 
-input[type="range"] {
+/* DIBUJO LIBRE */
+
+.canvas-wrap {
   width: 100%;
-  accent-color: #dc75a0;
-  margin: 22px 0;
-}
-
-.progress {
-  height: 13px;
-  background: #f8dce7;
-  border-radius: 20px;
   overflow: hidden;
-  margin: 15px 0;
-}
-
-.progress-fill {
-  width: 0%;
-  height: 100%;
-  background: linear-gradient(90deg, #ed9cba, #ce5d8c);
-  transition: width .2s;
+  border: 3px dashed #e8a0bb;
+  border-radius: 18px;
+  background: white;
+  margin: 18px auto;
+  touch-action: none;
 }
 
 canvas {
-  width: 100%;
-  border: 2px solid #f2b6cc;
-  border-radius: 15px;
-  background: white;
-  touch-action: none;
   display: block;
-  margin: 15px auto;
+  width: 100%;
+  height: auto;
+  touch-action: none;
+  cursor: crosshair;
 }
 
 .tools {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 5px;
+  margin: 12px auto;
 }
 
-.color {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  padding: 0;
-  border: 3px solid white;
-  box-shadow: 0 0 0 1px #e5a5bc;
+.tools button {
+  padding: 9px 15px;
 }
 
-.color.active {
-  box-shadow: 0 0 0 3px #bd527c;
+input[type="color"] {
+  width: 48px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
 }
 
-.timer {
-  font-size: 35px;
-  color: #c0527d;
-  font-weight: bold;
-  margin: 12px;
-}
+/* RETO DEL GATITO */
 
-.game-area {
+.cat-area {
   position: relative;
   width: 100%;
-  height: 300px;
-  background: #fff0f5;
-  border: 2px dashed #e9a3bc;
+  max-width: 430px;
+  margin: 18px auto;
+  border: 3px dashed #e8a0bb;
   border-radius: 18px;
   overflow: hidden;
-  margin: 15px 0;
+  background: #fff7fa;
+  touch-action: none;
 }
 
 .cat-guide {
-  width: 190px;
-  height: 190px;
-  max-width: 70%;
-  object-fit: contain;
-  opacity: .35;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-}
-
-.game-canvas {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  border: none;
-  border-radius: 0;
-  margin: 0;
+  pointer-events: none;
 }
 
-.poem-card {
-  background: #fff0f5;
-  border: 1px solid #f3c1d3;
-  border-radius: 17px;
-  padding: 17px;
-  margin: 13px 0;
-}
-
-.poem-card button {
+#catCanvas {
+  position: relative;
+  z-index: 2;
   width: 100%;
+  background: transparent;
 }
 
-.final-message {
-  font-size: 21px;
-  color: #c0527d;
-  line-height: 1.7;
+/* TEMPORIZADOR */
+
+.timer {
+  font-size: 35px;
+  font-weight: bold;
+  color: #d978a0;
+  margin: 15px;
+}
+
+/* CARTITAS */
+
+.letter-card {
+  background: #fff3f7;
+  border: 1px solid #f2ccda;
+  border-radius: 20px;
+  padding: 20px;
+  margin: 17px 0;
+  box-shadow: 0 5px 15px #d978a01c;
+}
+
+.letter-card p {
+  text-align: left;
+  white-space: pre-line;
+}
+
+.letter-content {
+  display: none;
+  margin-top: 15px;
+  padding-top: 12px;
+  border-top: 1px dashed #e6a1ba;
+}
+
+.letter-content.open {
+  display: block;
+  animation: appear 0.4s ease;
+}
+
+/* PANTALLA FINAL */
+
+.final-heart {
+  font-size: 65px;
+  animation: pulse 1.3s infinite;
+}
+
+@keyframes pulse {
+  50% {
+    transform: scale(1.18);
+  }
 }
 
 footer {
-  text-align: center;
+  margin-top: 30px;
+  color: #c18ba0;
   font-size: 12px;
-  color: #b66a88;
-  margin: 25px 0;
 }
 </style>
 </head>
 <body>
 
 <!-- ETAPA 1: BIENVENIDA -->
-<section class="card" id="stage1">
-  <div class="heart">♡</div>
+<section id="stage1" class="stage active">
+  <div class="heart">♡ ♡ ♡</div>
   <h1>Hola, Sofi 💗</h1>
-  <p>
-    Preparé algo especial para ti.
-    No es un regalo común, sino un pequeño
-    recorrido lleno de detalles, sonrisas
-    y algunas sorpresas.
-  </p>
-  <p>¿Me acompañas?</p>
-  <button onclick="showStage(2)">Comenzar ♡</button>
+  <p>Preparé algo pequeñito para ti.</p>
+  <p>No es una carta cualquiera...</p>
+
+  <div class="envelope" id="envelope" onclick="openEnvelope()">
+    <div class="envelope-note">
+      Un detallito hecho con cariño
+    </div>
+  </div>
+
+  <p id="envelopeText">Toca el sobre para abrirlo.</p>
+
+  <button id="startButton" onclick="showStage(2)" disabled>
+    Comenzar nuestra aventura
+  </button>
+
+  <footer>Hecho especialmente para ti ♡</footer>
 </section>
 
-<!-- ETAPA 2: POP -->
-<section class="card hidden" id="stage2">
-  <h2>Unas preguntitas...</h2>
-  <p>Elige lo que más te guste. No hay respuestas incorrectas.</p>
 
-  <button class="message-option" onclick="chooseMessage(0)">
-    ¿Qué prefieres: abrazos o besitos?
-  </button>
-  <button class="message-option" onclick="chooseMessage(1)">
-    ¿Una tarde de películas o una aventura?
-  </button>
-  <button class="message-option" onclick="chooseMessage(2)">
-    ¿Un regalo sorpresa o una carta?
-  </button>
-  <button class="message-option" onclick="chooseMessage(3)">
-    ¿Qué tan cursi eres?
-  </button>
+<!-- ETAPA 2: PREGUNTAS POP -->
+<section id="stage2" class="stage">
+  <h2>Unas preguntitas para ti</h2>
+  <p>Responde con sinceridad... o con lo primero que se te ocurra.</p>
 
-  <div class="result hidden" id="popResult"></div>
-  <button onclick="showStage(3)">Continuar ♡</button>
+  <div class="question">
+    <h3>1. ¿Qué prefieres para una tarde perfecta?</h3>
+    <button onclick="answerPop(1, 'Una tarde tranquila')">Una tarde tranquila</button>
+    <button onclick="answerPop(1, 'Una aventura espontánea')">Una aventura espontánea</button>
+    <button onclick="answerPop(1, 'Un poquito de ambas')">Un poquito de ambas</button>
+    <p id="answer1"></p>
+  </div>
+
+  <div class="question">
+    <h3>2. ¿Qué detalle te hace sonreír?</h3>
+    <button onclick="answerPop(2, 'Un mensaje inesperado')">Un mensaje inesperado</button>
+    <button onclick="answerPop(2, 'Una canción dedicada')">Una canción dedicada</button>
+    <button onclick="answerPop(2, 'Un detalle hecho a mano')">Un detalle hecho a mano</button>
+    <p id="answer2"></p>
+  </div>
+
+  <div class="question">
+    <h3>3. Si pudieras elegir un plan...</h3>
+    <button onclick="answerPop(3, 'Salir a conocer lugares')">Salir a conocer lugares</button>
+    <button onclick="answerPop(3, 'Ver películas y descansar')">Ver películas y descansar</button>
+    <button onclick="answerPop(3, 'Improvisar algo divertido')">Improvisar algo divertido</button>
+    <p id="answer3"></p>
+  </div>
+
+  <div class="question">
+    <h3>4. ¿Qué palabra te representa hoy?</h3>
+    <button onclick="answerPop(4, 'Felicidad')">Felicidad</button>
+    <button onclick="answerPop(4, 'Curiosidad')">Curiosidad</button>
+    <button onclick="answerPop(4, 'Tranquilidad')">Tranquilidad</button>
+    <p id="answer4"></p>
+  </div>
+
+  <button onclick="showStage(3)">Siguiente sorpresa 💗</button>
 </section>
 
-<!-- ETAPA 3: MEDIDOR -->
-<section class="card hidden" id="stage3">
-  <h2>¿Cuánto cariño aceptas? 💗</h2>
-  <p>
-    Selecciona el porcentaje que quieras.
-    Prometo no juzgar tu respuesta.
+
+<!-- ETAPA 3: TOCADISCOS -->
+<section id="stage3" class="stage">
+  <h2>Una canción para ti, Sofi</h2>
+
+  <p class="music-dedication">
+    Hay canciones que parecen hechas para recordarnos
+    lo bonita que puede ser una persona.
+    Esta es una de ellas.
+
+    Quería que tuvieras un pequeño momento musical
+    dentro de esta carta.
   </p>
 
-  <div class="heart">♡</div>
-  <h1 id="percentText">50%</h1>
+  <div class="turntable">
+    <div class="vinyl" id="vinyl">
+      <div class="vinyl-label">
+        <span>JUST THE WAY</span>
+        <span>YOU ARE</span>
+        <small>BRUNO MARS</small>
+      </div>
+    </div>
+    <div class="tonearm" id="tonearm"></div>
+  </div>
+
+  <h3>Just the Way You Are</h3>
+  <p>Bruno Mars</p>
+
+  <audio id="loveSong" preload="metadata">
+    <source src="audio/just-the-way-you-are.mp3" type="audio/mpeg">
+  </audio>
+
+  <p id="musicStatus">Una canción especial para escuchar con calma.</p>
+
+  <button id="musicButton" onclick="toggleMusic()">
+    ▶ Reproducir
+  </button>
+
+  <button class="secondary" onclick="showStage(4)">
+    Continuar 💗
+  </button>
+</section>
+
+
+<!-- ETAPA 4: MEDIDOR DE CARIÑO -->
+<section id="stage4" class="stage">
+  <h2>Una pregunta importante...</h2>
+
+  <p>
+    ¿Qué tanto cariño crees que cabe en esta pequeña carta?
+  </p>
+
+  <div class="love-number">
+    <span id="loveValue">50</span>%
+  </div>
 
   <input
     type="range"
-    id="affection"
+    id="loveSlider"
     min="0"
     max="100"
     value="50"
+    oninput="updateLove()"
   >
 
-  <div class="progress">
-    <div class="progress-fill" id="affectionFill"></div>
-  </div>
-
-  <p id="affectionMessage">
-    Un poquito de cariño para comenzar.
+  <p id="loveMessage" class="love-message">
+    Creo que todavía hay mucho cariño por descubrir.
   </p>
 
-  <button onclick="savePercentage()">Aceptar y continuar ♡</button>
+  <button onclick="showStage(5)">
+    ¡Siguiente sorpresa!
+  </button>
 </section>
 
-<!-- ETAPA 4: DIBUJO LIBRE -->
-<section class="card hidden" id="stage4">
-  <h2>Un pequeño espacio para ti 🎨</h2>
+
+<!-- ETAPA 5: DIBUJO LIBRE -->
+<section id="stage5" class="stage">
+  <h2>Un espacio para tu creatividad</h2>
+
   <p>
     Puedes dibujar lo que quieras.
-    No importa si es una obra de arte
-    o un dibujo hecho con mucho sueño.
+    No importa si queda bonito, lo importante es que sea tuyo.
   </p>
 
-  <canvas id="drawingCanvas" width="700" height="420"></canvas>
-
-  <div class="tools">
-    <button class="color active" style="background:#d85c8b"
-      data-color="#d85c8b"></button>
-    <button class="color" style="background:#f3a6bf"
-      data-color="#f3a6bf"></button>
-    <button class="color" style="background:#a77bd1"
-      data-color="#a77bd1"></button>
-    <button class="color" style="background:#72a9d8"
-      data-color="#72a9d8"></button>
-    <button class="color" style="background:#555"
-      data-color="#555555"></button>
-    <button class="color" style="background:#222"
-      data-color="#222222"></button>
+  <div class="canvas-wrap">
+    <canvas id="drawingCanvas" width="700" height="420"></canvas>
   </div>
 
   <div class="tools">
-    <button class="secondary" id="eraser">Borrador</button>
-    <button class="secondary" id="clearDrawing">Limpiar</button>
+    <label>
+      Color:
+      <input type="color" id="drawColor" value="#e88db1">
+    </label>
+
+    <button onclick="setEraser(false)">Lápiz</button>
+    <button onclick="setEraser(true)">Borrador</button>
+    <button class="secondary" onclick="clearDrawing()">Limpiar</button>
   </div>
 
-  <button onclick="saveDrawing()">Guardar dibujo ♡</button>
+  <button onclick="saveDrawing()">
+    Guardar mi dibujo 💗
+  </button>
 </section>
 
-<!-- ETAPA 5: RETO DEL GATITO -->
-<section class="card hidden" id="stage5">
-  <h2>¡Un reto para ti! 🐱</h2>
+
+<!-- ETAPA 6: RETO DEL GATITO -->
+<section id="stage6" class="stage">
+  <h2>¡Un pequeño reto!</h2>
+
   <p>
-    Tienes 30 segundos para dibujar
-    sobre la silueta de este gatito.
+    Este gatito necesita un poquito de tu talento artístico.
+    Dibuja encima de la silueta antes de que termine el tiempo.
   </p>
 
-  <div class="timer" id="catTimer">30</div>
+  <div class="timer" id="timer">30</div>
 
-  <div class="game-area" id="catArea">
-    <svg class="cat-guide" viewBox="0 0 200 200"
-      xmlns="http://www.w3.org/2000/svg">
-      <path d="
-        M48 82
-        L38 28
-        L82 55
-        Q100 48 118 55
-        L162 28
-        L152 82
-        Q175 105 165 145
-        Q155 180 100 180
-        Q45 180 35 145
-        Q25 105 48 82 Z"
-        fill="none"
-        stroke="#c0527d"
-        stroke-width="5"
-        stroke-linejoin="round"
-        stroke-linecap="round"/>
-      <path d="M70 110 Q78 120 86 110
-        M114 110 Q122 120 130 110"
-        fill="none" stroke="#c0527d"
-        stroke-width="4" stroke-linecap="round"/>
-      <path d="M94 130 Q100 137 106 130"
-        fill="none" stroke="#c0527d"
-        stroke-width="4" stroke-linecap="round"/>
-      <path d="M60 128 L25 122 M60 137 L25 140
-        M140 128 L175 122 M140 137 L175 140"
-        stroke="#c0527d" stroke-width="3"
-        stroke-linecap="round"/>
+  <div class="cat-area">
+    <svg class="cat-guide" viewBox="0 0 400 400"
+         xmlns="http://www.w3.org/2000/svg">
+      <g fill="#f6c5d8" stroke="#d978a0" stroke-width="5"
+         stroke-linejoin="round">
+        <path d="M90 145 L105 45 L180 105
+                 Q200 95 220 105 L295 45 L310 145
+                 Q350 185 340 250
+                 Q330 335 200 345
+                 Q70 335 60 250
+                 Q50 185 90 145 Z"/>
+      </g>
+      <g fill="#a95b7c">
+        <ellipse cx="145" cy="205" rx="12" ry="17"/>
+        <ellipse cx="255" cy="205" rx="12" ry="17"/>
+        <path d="M190 238 Q200 250 210 238 Q200 260 190 238"/>
+      </g>
+      <g fill="none" stroke="#a95b7c" stroke-width="4"
+         stroke-linecap="round">
+        <path d="M180 265 Q200 280 220 265"/>
+        <path d="M135 240 L75 230 M135 255 L75 260"/>
+        <path d="M265 240 L325 230 M265 255 L325 260"/>
+      </g>
     </svg>
 
-    <canvas id="catCanvas" class="game-canvas"
-      width="700" height="700"></canvas>
+    <canvas id="catCanvas" width="400" height="400"></canvas>
   </div>
 
-  <button id="startCat">¡Comenzar reto!</button>
-  <button class="secondary" id="clearCat">Borrar dibujo</button>
+  <button id="catStartButton" onclick="startCatChallenge()">
+    Comenzar reto
+  </button>
 
-  <p class="small" id="catMessage">
-    Cuando estés lista, comienza.
+  <button class="secondary" onclick="clearCatDrawing()">
+    Limpiar dibujo
+  </button>
+
+  <p id="catMessage">
+    Tienes 30 segundos. ¡Tú puedes!
   </p>
+
+  <button id="catContinue" class="hidden" onclick="showStage(7)">
+    Terminé mi obra maestra 💗
+  </button>
 </section>
 
-<!-- ETAPA 6: CARTITAS -->
-<section class="card hidden" id="stage6">
-  <h2>Unas cartitas para ti 💌</h2>
+
+<!-- ETAPA 7: CARTITAS -->
+<section id="stage7" class="stage">
+  <h2>Tres pequeños mensajes para ti</h2>
+
   <p>
-    Llegaste hasta aquí y todavía tengo
-    algunas cositas que decirte.
+    Llegamos a una de mis partes favoritas.
+    Abrí cada cartita cuando quieras.
   </p>
 
-  <div class="poem-card">
-    <h2>Primera cartita</h2>
-    <button onclick="openPoem(0)">Abrir ♡</button>
-    <p class="hidden" id="poem0"></p>
+  <div class="letter-card">
+    <h3>♡ Lo bonito de coincidir</h3>
+    <button onclick="toggleLetter(1)">Abrir cartita</button>
+
+    <div id="letter1" class="letter-content">
+      <p>
+        A veces la vida tiene formas muy curiosas de hacer
+        que dos personas coincidan.
+
+        No siempre hace falta conocer a alguien desde hace
+        muchísimo tiempo para encontrar algo especial en esa
+        persona. A veces basta una conversación, una sonrisa
+        o un pequeño momento para que alguien comience a
+        ocupar un lugar bonito en nuestros pensamientos.
+
+        Me parece bonito poder coincidir contigo, conocer
+        poquito a poquito tu forma de ser y descubrir esos
+        detalles que te hacen única.
+
+        Ojalá nunca dejes de ser tú misma, porque precisamente
+        eso es lo que hace especial a una persona.
+
+        Y si algo me gustaría que supieras es que me alegra
+        haber coincidido contigo. 💗
+      </p>
+    </div>
   </div>
 
-  <div class="poem-card">
-    <h2>Segunda cartita</h2>
-    <button onclick="openPoem(1)">Abrir ♡</button>
-    <p class="hidden" id="poem1"></p>
+  <div class="letter-card">
+    <h3>♡ Ojalá nunca te falten motivos</h3>
+    <button onclick="toggleLetter(2)">Abrir cartita</button>
+
+    <div id="letter2" class="letter-content">
+      <p>
+        Ojalá nunca te falten motivos para sonreír.
+
+        Que siempre encuentres una canción que te alegre
+        el día, una persona con quien puedas hablar de todo
+        y momentos que te hagan olvidar por un ratito
+        cualquier preocupación.
+
+        Ojalá tengas días tranquilos, sueños que te emocionen
+        y muchas oportunidades para descubrir cosas nuevas.
+
+        También espero que nunca olvides lo valiosa que eres.
+        Que no tengas que cambiar tu forma de ser para
+        sentirte suficiente y que siempre encuentres personas
+        que sepan apreciar lo bonito que hay en ti.
+
+        No todos los días tienen que ser perfectos.
+        A veces basta con encontrar algo pequeño que nos
+        recuerde que también hay cosas bonitas en la vida.
+
+        Y deseo que tengas muchísimas de esas cosas. 💗
+      </p>
+    </div>
   </div>
 
-  <div class="poem-card">
-    <h2>Tercera cartita</h2>
-    <button onclick="openPoem(2)">Abrir ♡</button>
-    <p class="hidden" id="poem2"></p>
+  <div class="letter-card">
+    <h3>♡ Un último detallito para ti</h3>
+    <button onclick="toggleLetter(3)">Abrir cartita</button>
+
+    <div id="letter3" class="letter-content">
+      <p>
+        Bueno, Sofi... llegamos al final de esta pequeña
+        aventura.
+
+        Quería hacer algo diferente, algo que no fuera
+        solamente escribir unas cuantas palabras y enviarlas.
+        Por eso preparé las preguntas, el tocadiscos,
+        los dibujos y hasta el pequeño reto del gatito.
+
+        Quizá algunas cosas quedaron un poquito improvisadas,
+        pero cada parte fue pensada para sacarte una sonrisa
+        y regalarte un momento agradable.
+
+        Gracias por formar parte de este pequeño detalle.
+        Espero que hayas disfrutado cada sorpresa y que,
+        cuando vuelvas a recordar esta carta, te quede
+        una sensación bonita.
+
+        Nunca olvides que mereces cariño, respeto,
+        tranquilidad y personas que te hagan sentir bien.
+
+        Y, por último, quiero decirte algo:
+
+        Eres la mejor personita, Sofi. 💗
+      </p>
+    </div>
   </div>
 
-  <button onclick="showStage('final')">Terminar ♡</button>
+  <button onclick="showStage(8)">
+    Ver el último mensaje
+  </button>
 </section>
 
-<!-- FINAL -->
-<section class="card hidden" id="stageFinal">
-  <div class="heart">♡</div>
-  <h1>Para ti, Sofi</h1>
-  <p class="final-message">
-    Eres una personita muy especial.
-    Espero que esta pequeña sorpresa
-    te haya sacado una sonrisa.
+
+<!-- PANTALLA FINAL -->
+<section id="stage8" class="stage">
+  <div class="final-heart">💗</div>
+
+  <h1>¡Eso es todo, Sofi!</h1>
+
+  <p>
+    Espero que esta pequeña sorpresa te haya sacado
+    al menos una sonrisa.
   </p>
-  <h2>Eres la mejor personita. 💗</h2>
-  <p>Con mucho cariño.</p>
-</section>
 
-<footer>Hecho con cariño ♡</footer>
-  <script>
-let selectedPercentage = 50;
-let drawingSaved = false;
-let catFinished = false;
-let catTime = 30;
-let catInterval = null;
+  <p>
+    Gracias por tomarte el tiempo de llegar hasta aquí.
+    Te mando un abrazo enorme.
+  </p>
 
-// CAMBIO DE PANTALLAS
+  <h2>Con mucho cariño ♡</h2>
+
+  <p class="small-text">
+    Fin de esta pequeña aventura.
+  </p>
+
+  <button onclick="location.reload()">
+    Volver a comenzar
+  </button>
+          </section>
+          <script>
+/* CAMBIO DE PANTALLAS */
+
 function showStage(number) {
-  document.querySelectorAll(".card").forEach(card => {
-    card.classList.add("hidden");
+  document.querySelectorAll(".stage").forEach(stage => {
+    stage.classList.remove("active");
   });
 
-  const target = number === "final"
-    ? document.getElementById("stageFinal")
-    : document.getElementById("stage" + number);
+  const next = document.getElementById("stage" + number);
+  if (next) {
+    next.classList.add("active");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 
-  if (target) target.classList.remove("hidden");
+  if (number === 5) setupCanvas();
+  if (number === 6) setupCatCanvas();
 
-  window.scrollTo({ top: 0, behavior: "smooth" });
-
-  if (number === 4) resizeCanvas(drawingCanvas);
-  if (number === 5) resizeCanvas(catCanvas);
+  if (number !== 3) {
+    pauseMusic();
+  }
 }
 
-// ETAPA 2: RESPUESTAS POP
-const popMessages = [
-  "Yo creo que ambos son una excelente opción. Aunque un abrazo largo tiene algo especial. ♡",
-  "Una aventura contigo podría convertirse en un recuerdo precioso.",
-  "Una carta tiene algo mágico: puedes volver a leerla cuando quieras.",
-  "No existe una cantidad máxima de cursilería cuando se trata de alguien especial. 💗"
-];
 
-function chooseMessage(index) {
-  const result = document.getElementById("popResult");
-  result.textContent = popMessages[index];
-  result.classList.remove("hidden");
+/* SOBRE DE BIENVENIDA */
+
+function openEnvelope() {
+  const envelope = document.getElementById("envelope");
+
+  envelope.classList.add("open");
+
+  document.getElementById("envelopeText").textContent =
+    "¡Sorpresa! Preparé esto especialmente para ti. 💗";
+
+  document.getElementById("startButton").disabled = false;
 }
 
-// ETAPA 3: PORCENTAJE
-const affection = document.getElementById("affection");
 
-function updatePercentage() {
-  const value = Number(affection.value);
-  document.getElementById("percentText").textContent = value + "%";
-  document.getElementById("affectionFill").style.width = value + "%";
+/* PREGUNTAS */
+
+const popAnswers = {};
+
+function answerPop(question, answer) {
+  popAnswers[question] = answer;
+
+  const reactions = [
+    "",
+    "¡Qué bonita elección! 💗",
+    "Me gusta esa respuesta.",
+    "Suena como un plan perfecto.",
+    "¡Espero que tengas muchos días así!"
+  ];
+
+  document.getElementById("answer" + question).textContent =
+    answer + " — " + reactions[question];
+}
+
+
+/* TOCADISCOS Y AUDIO */
+
+const loveSong = document.getElementById("loveSong");
+const vinyl = document.getElementById("vinyl");
+const tonearm = document.getElementById("tonearm");
+const musicButton = document.getElementById("musicButton");
+
+function toggleMusic() {
+  if (loveSong.paused) {
+    loveSong.play().then(() => {
+      vinyl.classList.add("playing");
+      tonearm.classList.add("playing");
+      musicButton.textContent = "⏸ Pausar";
+      document.getElementById("musicStatus").textContent =
+        "Reproduciendo para ti...";
+    }).catch(() => {
+      document.getElementById("musicStatus").textContent =
+        "No se pudo reproducir. Revisa que el MP3 esté en la carpeta audio.";
+    });
+  } else {
+    pauseMusic();
+  }
+}
+
+function pauseMusic() {
+  if (!loveSong) return;
+
+  loveSong.pause();
+  vinyl.classList.remove("playing");
+  tonearm.classList.remove("playing");
+  musicButton.textContent = "▶ Reproducir";
+  document.getElementById("musicStatus").textContent =
+    "Una canción especial para escuchar con calma.";
+}
+
+loveSong.addEventListener("ended", () => {
+  pauseMusic();
+});
+
+
+/* MEDIDOR DE CARIÑO */
+
+function updateLove() {
+  const value = Number(document.getElementById("loveSlider").value);
+
+  document.getElementById("loveValue").textContent = value;
 
   let message = "";
 
-  if (value <= 25) {
-    message = "Poquito a poquito, sin presiones. ♡";
-  } else if (value <= 50) {
-    message = "Un cariño bonito y tranquilo. 💗";
-  } else if (value <= 75) {
-    message = "¡Vaya! Aquí hay bastante cariño.";
+  if (value <= 20) {
+    message = "¡Jajaja! Bueno, tendremos que seguir acumulando momentos bonitos.";
+  } else if (value <= 40) {
+    message = "Un poquito de cariño ya es suficiente para comenzar algo bonito.";
+  } else if (value <= 60) {
+    message = "¡Eso ya es bastante! Espero que esta carta te saque una sonrisa.";
+  } else if (value <= 80) {
+    message = "¡Qué bonito! Te mando una dosis extra de cariño.";
   } else {
-    message = "¡Muchísimo cariño! Qué bonito. 💕";
+    message = "¡Muchísimo cariño! Esta sorpresa se queda cortita.";
   }
 
-  document.getElementById("affectionMessage").textContent = message;
+  document.getElementById("loveMessage").textContent = message;
 }
 
-affection.addEventListener("input", updatePercentage);
 
-function savePercentage() {
-  selectedPercentage = Number(affection.value);
-  showStage(4);
+/* DIBUJO LIBRE */
+
+let drawingCanvas = document.getElementById("drawingCanvas");
+let drawingCtx = drawingCanvas.getContext("2d");
+let drawing = false;
+let eraser = false;
+let drawingReady = false;
+
+function setupCanvas() {
+  if (drawingReady) return;
+  drawingReady = true;
+
+  drawingCtx.lineWidth = 5;
+  drawingCtx.lineCap = "round";
+  drawingCtx.lineJoin = "round";
+  drawingCtx.strokeStyle = "#e88db1";
+
+  drawingCanvas.addEventListener("pointerdown", startDrawing);
+  drawingCanvas.addEventListener("pointermove", draw);
+  drawingCanvas.addEventListener("pointerup", stopDrawing);
+  drawingCanvas.addEventListener("pointercancel", stopDrawing);
+  drawingCanvas.addEventListener("pointerleave", stopDrawing);
 }
 
-updatePercentage();
+function getPosition(event, canvas) {
+  const rect = canvas.getBoundingClientRect();
 
-// FUNCIONES GENERALES PARA LOS LIENZOS
-const drawingCanvas = document.getElementById("drawingCanvas");
-const catCanvas = document.getElementById("catCanvas");
-
-let currentColor = "#d85c8b";
-let erasing = false;
-
-function resizeCanvas(canvas) {
-  const ctx = canvas.getContext("2d");
-  ctx.lineCap = "round";
-  ctx.lineJoin = "round";
-  ctx.lineWidth = 5;
+  return {
+    x: (event.clientX - rect.left) * canvas.width / rect.width,
+    y: (event.clientY - rect.top) * canvas.height / rect.height
+  };
 }
 
-function setupDrawing(canvas, getColor) {
-  const ctx = canvas.getContext("2d");
-  let drawing = false;
+function startDrawing(event) {
+  drawing = true;
+  drawingCanvas.setPointerCapture(event.pointerId);
 
-  function position(event) {
-    const rect = canvas.getBoundingClientRect();
+  const pos = getPosition(event, drawingCanvas);
 
-    return {
-      x: (event.clientX - rect.left) * canvas.width / rect.width,
-      y: (event.clientY - rect.top) * canvas.height / rect.height
-    };
-  }
-
-  canvas.addEventListener("pointerdown", event => {
-    event.preventDefault();
-    drawing = true;
-    canvas.setPointerCapture(event.pointerId);
-
-    const point = position(event);
-    ctx.beginPath();
-    ctx.moveTo(point.x, point.y);
-  });
-
-  canvas.addEventListener("pointermove", event => {
-    if (!drawing) return;
-    event.preventDefault();
-
-    const point = position(event);
-
-    ctx.strokeStyle = getColor();
-    ctx.lineWidth = 9;
-    ctx.lineCap = "round";
-    ctx.lineJoin = "round";
-
-    ctx.lineTo(point.x, point.y);
-    ctx.stroke();
-  });
-
-  function stopDrawing() {
-    drawing = false;
-    ctx.closePath();
-  }
-
-  canvas.addEventListener("pointerup", stopDrawing);
-  canvas.addEventListener("pointercancel", stopDrawing);
+  drawingCtx.beginPath();
+  drawingCtx.moveTo(pos.x, pos.y);
 }
 
-setupDrawing(drawingCanvas, () =>
-  erasing ? "#ffffff" : currentColor
-);
+function draw(event) {
+  if (!drawing) return;
 
-setupDrawing(catCanvas, () => "#c0527d");
+  const pos = getPosition(event, drawingCanvas);
 
-// COLORES DEL DIBUJO LIBRE
-document.querySelectorAll(".color").forEach(button => {
-  button.addEventListener("click", () => {
-    document.querySelectorAll(".color").forEach(b => {
-      b.classList.remove("active");
-    });
+  drawingCtx.strokeStyle = eraser
+    ? "#ffffff"
+    : document.getElementById("drawColor").value;
 
-    button.classList.add("active");
-    currentColor = button.dataset.color;
-    erasing = false;
-    document.getElementById("eraser").classList.remove("active");
-  });
-});
+  drawingCtx.lineWidth = eraser ? 24 : 5;
 
-document.getElementById("eraser").addEventListener("click", () => {
-  erasing = true;
-  document.getElementById("eraser").classList.add("active");
-  document.querySelectorAll(".color").forEach(b => {
-    b.classList.remove("active");
-  });
-});
+  drawingCtx.lineTo(pos.x, pos.y);
+  drawingCtx.stroke();
+}
 
-document.getElementById("clearDrawing").addEventListener("click", () => {
-  drawingCanvas.getContext("2d").clearRect(
+function stopDrawing() {
+  drawing = false;
+  drawingCtx.beginPath();
+}
+
+function setEraser(value) {
+  eraser = value;
+}
+
+function clearDrawing() {
+  drawingCtx.clearRect(
     0, 0, drawingCanvas.width, drawingCanvas.height
   );
-});
-
-function saveDrawing() {
-  drawingSaved = true;
-  showStage(5);
 }
 
-// ETAPA 5: RETO DEL GATITO
-document.getElementById("clearCat").addEventListener("click", () => {
-  if (catFinished) return;
+function saveDrawing() {
+  showStage(6);
+}
 
-  catCanvas.getContext("2d").clearRect(
-    0, 0, catCanvas.width, catCanvas.height
-  );
-});
+
+/* RETO DEL GATITO */
+
+const catCanvas = document.getElementById("catCanvas");
+const catCtx = catCanvas.getContext("2d");
+
+let catDrawing = false;
+let catReady = false;
+let catTimer = null;
+let catSeconds = 30;
+let catFinished = false;
+
+function setupCatCanvas() {
+  if (catReady) return;
+  catReady = true;
+
+  catCtx.lineWidth = 5;
+  catCtx.lineCap = "round";
+  catCtx.lineJoin = "round";
+  catCtx.strokeStyle = "#d978a0";
+
+  catCanvas.addEventListener("pointerdown", startCatDrawing);
+  catCanvas.addEventListener("pointermove", drawCat);
+  catCanvas.addEventListener("pointerup", stopCatDrawing);
+  catCanvas.addEventListener("pointercancel", stopCatDrawing);
+  catCanvas.addEventListener("pointerleave", stopCatDrawing);
+}
+
+function startCatDrawing(event) {
+  if (!catTimer || catFinished) return;
+
+  catDrawing = true;
+  catCanvas.setPointerCapture(event.pointerId);
+
+  const pos = getPosition(event, catCanvas);
+
+  catCtx.beginPath();
+  catCtx.moveTo(pos.x, pos.y);
+}
+
+function drawCat(event) {
+  if (!catDrawing || catFinished) return;
+
+  const pos = getPosition(event, catCanvas);
+
+  catCtx.lineTo(pos.x, pos.y);
+  catCtx.stroke();
+}
+
+function stopCatDrawing() {
+  catDrawing = false;
+  catCtx.beginPath();
+}
+
+function clearCatDrawing() {
+  catCtx.clearRect(0, 0, catCanvas.width, catCanvas.height);
+}
 
 function startCatChallenge() {
-  if (catInterval || catFinished) return;
+  if (catTimer || catFinished) return;
 
-  catTime = 30;
+  catSeconds = 30;
 
-  document.getElementById("startCat").disabled = true;
+  document.getElementById("catStartButton").disabled = true;
   document.getElementById("catMessage").textContent =
-    "¡A dibujar ese gatito!";
+    "¡A dibujar! El tiempo comienza ahora.";
 
-  document.getElementById("catTimer").textContent = catTime;
+  document.getElementById("timer").textContent = catSeconds;
 
-  catInterval = setInterval(() => {
-    catTime--;
-    document.getElementById("catTimer").textContent = catTime;
+  catTimer = setInterval(() => {
+    catSeconds--;
 
-    if (catTime <= 0) {
-      clearInterval(catInterval);
-      catInterval = null;
-      catFinished = true;
+    document.getElementById("timer").textContent = catSeconds;
 
-      document.getElementById("catMessage").textContent =
-        "¡Tiempo! Tu gatito quedó precioso, porque lo hiciste tú. ♡";
-
-      document.getElementById("startCat").textContent =
-        "Continuar a mis cartitas 💌";
-
-      document.getElementById("startCat").disabled = false;
+    if (catSeconds <= 0) {
+      finishCatChallenge();
     }
   }, 1000);
 }
 
-document.getElementById("startCat").addEventListener(
-  "click",
-  () => {
-    if (catFinished) {
-      showStage(6);
-    } else {
-      startCatChallenge();
-    }
-  }
-);
+function finishCatChallenge() {
+  clearInterval(catTimer);
+  catTimer = null;
+  catFinished = true;
 
-// ETAPA 6: POEMAS
-const poems = [
-  `A veces las cosas más bonitas
-  aparecen sin hacer ruido.
-  Y entre tantos días comunes,
-  hay personas que logran
-  hacerlos un poquito mejores.
-  Tú eres una de ellas. ♡`,
+  document.getElementById("timer").textContent = "¡Tiempo!";
+  document.getElementById("catMessage").textContent =
+    "¡JAJA! Tu gatito es una obra de arte. Me encanta tu creatividad. 💗";
 
-  `No hacen falta grandes palabras
-  para decir algo bonito.
-  Basta una sonrisa,
-  un momento inesperado
-  y alguien que haga especial
-  hasta el día más sencillo. 💗`,
-
-  `Si pudiera guardar un instante,
-  guardaría uno que me hiciera sonreír.
-  Y si pudiera regalarte algo,
-  sería la oportunidad de verte feliz.
-  Porque mereces cosas bonitas. ♡`
-];
-
-function openPoem(index) {
-  document.getElementById("poem" + index).textContent =
-    poems[index];
-
-  document.getElementById("poem" + index)
-    .classList.remove("hidden");
+  document.getElementById("catStartButton").classList.add("hidden");
+  document.getElementById("catContinue").classList.remove("hidden");
 }
 
-// LA TERCERA CARTA CAMBIA SEGÚN SU PORCENTAJE
-function updateSpecialPoem() {
-  let specialMessage = "";
 
-  if (selectedPercentage <= 25) {
-    specialMessage =
-      "Aunque hayas elegido poquito, quería recordarte que mereces mucho cariño. ♡";
-  } else if (selectedPercentage <= 50) {
-    specialMessage =
-      "Espero que nunca te falten motivos para sonreír y personas que te quieran bonito. 💗";
-  } else if (selectedPercentage <= 75) {
-    specialMessage =
-      "Me alegra que hayas dejado entrar un poquito más de cariño en esta pequeña aventura. 💕";
-  } else {
-    specialMessage =
-      "Elegiste muchísimo cariño y espero que recibas cosas igual de bonitas. Te mereces lo mejor. 💗";
-  }
+/* CARTITAS */
 
-  poems[2] = specialMessage;
+function toggleLetter(number) {
+  const letter = document.getElementById("letter" + number);
+
+  letter.classList.toggle("open");
 }
 
-const originalOpenPoem = openPoem;
 
-openPoem = function(index) {
-  updateSpecialPoem();
-  originalOpenPoem(index);
-};
+/* CORAZONES FLOTANTES */
 
-// INICIO LIMPIO CADA VEZ QUE SE ABRE
-window.addEventListener("pageshow", () => {
-  affection.value = 50;
-  selectedPercentage = 50;
-  updatePercentage();
-});
+function createHeart() {
+  const heart = document.createElement("div");
+
+  heart.className = "heart";
+  heart.textContent = Math.random() > 0.5 ? "♡" : "♥";
+
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (15 + Math.random() * 20) + "px";
+  heart.style.animationDuration = (4 + Math.random() * 4) + "s";
+
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 8000);
+}
+
+setInterval(createHeart, 1800);
+
+
+/* INICIO */
+
+updateLove();
 </script>
 
 </body>
